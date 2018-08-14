@@ -2,7 +2,7 @@
 #include "constantes.h"
 
 #pragma region IEntiteMovable
-//L'entite saute avec une accélération de base, la gravité la fait redessendre. l'objet attendu est le sol
+//L'entite saute avec une accÃ©lÃ©ration de base, la gravitÃ© la fait redessendre. l'objet attendu est le sol
 void IEntiteMovable::gestionPositionY(sf::Time elapsedTime, sf::FloatRect sol)
 {
 	if (isCollision(sol))
@@ -22,14 +22,14 @@ void IEntiteMovable::gestionPositionY(sf::Time elapsedTime, sf::FloatRect sol)
 		position.y -= elapsedTime.asSeconds()*gravite;
 }
 
-//l'entité bouge dans les limites de la fenetre
+//l'entitÃ© bouge dans les limites de la fenetre
 void IEntiteMovable::move(sf::Time elapsedTime)
 {
 	unsigned int newPosition = position.x + elapsedTime.asSeconds() * speedX;
-	if (newPosition <= WINDOW_SIZE)
+	if (newPosition <= WINDOW_SIZE_X)
 		position.x = newPosition;
 	else
-		position.x = WINDOW_SIZE - spriteAnimer.getSize().x;
+		position.x = WINDOW_SIZE_X - spriteAnimer.getSize().x;
 }
 #pragma endregion
 
