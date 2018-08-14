@@ -4,7 +4,7 @@
 int main()
 {
 	//Création de la fenetre du jeux
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SUPER RUNNER");
+	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
 	
 	//Tant que l'on joue (fenetre ouverte)
 	while (window.isOpen())

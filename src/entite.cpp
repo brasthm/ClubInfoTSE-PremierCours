@@ -1,73 +1,98 @@
 #include "entite.h"
 #include "constantes.h"
 
-#pragma region IEntiteMovable
-//L'entite saute avec une accélération de base, la gravité la fait redessendre. l'objet attendu est le sol
-void IEntiteMovable::gestionPositionY(sf::Time elapsedTime, sf::FloatRect sol)
+#pragma region ComportementAttaque
+
+#pragma region AttaqueCaster
+void AttaqueCaster::shoot(const sf::Time& elapsedTime)
 {
-	if (isCollision(sol))
+	_shootProgression += elapsedTime;
+	if (_shootProgression >= _shootDelay)
 	{
-		isOnGround = true;
-		isJumping = false;
-		nbTour = 0;
+		_projectiles.push_back(std::make_unique<SpriteAnimer>(new SpriteAnimer(_projectilesSprite, _swapRateProjectiles)));
+		_shootProgression = sf::Time::Zero;
 	}
 
-	if (isJumping)
-	{
-		nbTour++;
-		position.y -= elapsedTime.asSeconds()*(speedY - gravite * nbTour);
-	}
-
-	if (!isOnGround)
-		position.y -= elapsedTime.asSeconds()*gravite;
 }
 
-//l'entité bouge dans les limites de la fenetre
-void IEntiteMovable::move(sf::Time elapsedTime)
+void AttaqueCaster::draw(sf::RenderWindow& window)
 {
-	unsigned int newPosition = position.x + elapsedTime.asSeconds() * speedX;
-	if (newPosition <= WINDOW_SIZE)
-		position.x = newPosition;
-	else
-		position.x = WINDOW_SIZE - spriteAnimer.getSize().x;
+	for (size_t i = 0; i < _projectiles.size(); i++)
+		_projectiles[i]->draw(window);
 }
 #pragma endregion
 
-#pragma region ICaster
-ICaster::~ICaster() 
+#pragma region AttaqueCac
+void AttaqueCac::shoot(const sf::Time& elapsedTime)
 {
-	for(std::vector<SpriteAnimer*>::const_iterator it = projectiles.begin(); it != projectiles.end(); it++)
-		delete *it;
+	_attaqueProgression += elapsedTime;
+	if (_attaqueProgression >= _attaqueDelay)
+		_attaqueProgression = sf::Time::Zero;
 }
 
-void ICaster::shoot(sf::Time elapsedTime)
+void AttaqueCac::draw(sf::RenderWindow& window)
 {
-	shootProgression += elapsedTime;
-	if (shootProgression >= shootDelay)
+	//draw annimation ? sprites ? rien ?
+}
+#pragma endregion
+
+#pragma endregion
+
+#pragma region Ientite
+void IEntite::hurt(const unsigned int& degat)
+{
+	if (_pvActuel - degat > 0)
+		_pvActuel -= degat;
+	else
 	{
-		projectiles.push_back(new SpriteAnimer(projectilesSprite, swapRateProjectiles));
-		shootProgression = sf::Time::Zero;
+		_pvActuel = 0;
+		_isAlive = false;
+	}	
+}
+#pragma endregion
+
+#pragma region IEntiteMovable
+//L'entite saute avec une accélération de base, la gravité la fait redessendre. l'objet attendu est le sol
+void IEntiteMovable::gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& sol)
+{
+	if (isCollision(sol))
+	{
+		_isOnGround = true;
+		_isJumping = false;
+		_nbTour = 0;
 	}
 
+	if (_isJumping)
+	{
+		_nbTour++;
+		_position.y -= elapsedTime.asSeconds()*(_speedY - _gravite * _nbTour);
+	}
+
+	if (!_isOnGround)
+		_position.y -= elapsedTime.asSeconds()*_gravite;
 }
 
-void ICaster::drawProjectiles(sf::RenderWindow& window)
+//l'entité bouge dans les limites de la fenetre
+void IEntiteMovable::move(const sf::Time& elapsedTime)
 {
-	for (size_t i = 0; i < projectiles.size(); i++)
-		projectiles[i]->draw(window);
+	unsigned int newPosition = _position.x + elapsedTime.asSeconds() * _speedX;
+	if (newPosition <= WINDOW_SIZE_X)
+		_position.x = newPosition;
+	else
+		_position.x = WINDOW_SIZE_X - _spriteAnimer->getSize().x;
 }
 #pragma endregion
 
 #pragma region Player
-Player::Player(SpriteAnimer spriteanimer, unsigned int PvMax, unsigned int Degat, sf::Time shootDelay, std::vector<sf::Sprite>& shootSprites, sf::Time shootSwap) :ICaster(shootDelay, shootSprites, shootSwap), IEntiteMovable(spriteanimer, PvMax, Degat)
+Player::Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntiteMovable(std::make_unique<SpriteAnimer>(spriteanimer), PvMax, Degat, std::make_unique<IComportementAttaque>(comportementattaque))
 {
 
 }
 
 void Player::heal(unsigned int heal)
 {
-	unsigned int newPv = pvActuel + heal;
-	pvActuel = (newPv > pvMax)? pvMax : newPv;
+	unsigned int newPv = _pvActuel + heal;
+	_pvActuel = (newPv > _pvMax)? _pvMax : newPv;
 }
 #pragma endregion
 
