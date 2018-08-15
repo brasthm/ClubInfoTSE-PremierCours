@@ -70,7 +70,6 @@ void IEntiteMovable::move(const sf::Time& elapsedTime)
 	else
 		_position.x = WINDOW_SIZE_X - _spriteAnimer->getSize().x;
 }
-#pragma endregion
 
 
 Player::Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntiteMovable(std::make_unique<SpriteAnimer>(spriteanimer), PvMax, Degat, std::make_unique<IComportementAttaque>(comportementattaque))
