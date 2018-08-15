@@ -1,9 +1,6 @@
 #include "entite.h"
 #include "constantes.h"
 
-#pragma region ComportementAttaque
-
-#pragma region AttaqueCaster
 void AttaqueCaster::shoot(const sf::Time& elapsedTime)
 {
 	_shootProgression += elapsedTime;
@@ -20,9 +17,7 @@ void AttaqueCaster::draw(sf::RenderWindow& window)
 	for (size_t i = 0; i < _projectiles.size(); i++)
 		_projectiles[i]->draw(window);
 }
-#pragma endregion
 
-#pragma region AttaqueCac
 void AttaqueCac::shoot(const sf::Time& elapsedTime)
 {
 	_attaqueProgression += elapsedTime;
@@ -34,11 +29,7 @@ void AttaqueCac::draw(sf::RenderWindow& window)
 {
 	//draw annimation ? sprites ? rien ?
 }
-#pragma endregion
 
-#pragma endregion
-
-#pragma region Ientite
 void IEntite::hurt(const unsigned int& degat)
 {
 	if (_pvActuel - degat > 0)
@@ -49,9 +40,7 @@ void IEntite::hurt(const unsigned int& degat)
 		_isAlive = false;
 	}	
 }
-#pragma endregion
 
-#pragma region IEntiteMovable
 //L'entite saute avec une accélération de base, la gravité la fait redessendre. l'objet attendu est le sol
 void IEntiteMovable::gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& sol)
 {
@@ -81,9 +70,7 @@ void IEntiteMovable::move(const sf::Time& elapsedTime)
 	else
 		_position.x = WINDOW_SIZE_X - _spriteAnimer->getSize().x;
 }
-#pragma endregion
 
-#pragma region Player
 Player::Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntiteMovable(std::move(spriteanimer), PvMax, Degat, std::move(comportementattaque))
 {
 
@@ -94,5 +81,5 @@ void Player::heal(unsigned int heal)
 	unsigned int newPv = _pvActuel + heal;
 	_pvActuel = (newPv > _pvMax)? _pvMax : newPv;
 }
-#pragma endregion
+
 

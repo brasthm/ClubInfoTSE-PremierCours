@@ -6,7 +6,6 @@
 #include <memory>
 
 
-#pragma region ComportementAttaque
 //Comportement d'attaque pour les entites
 class IComportementAttaque
 {
@@ -44,7 +43,6 @@ public:
 	void draw(sf::RenderWindow& window);
 
 };
-#pragma endregion
 
 //Class regroupant le minimum pour avoir une entité
 class IEntite

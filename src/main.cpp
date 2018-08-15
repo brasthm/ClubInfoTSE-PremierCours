@@ -1,6 +1,7 @@
 #include "constantes.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "constantes.h"
 
 int main()
 {
@@ -21,13 +22,11 @@ int main()
 				window.close();
 		}
 
-#pragma region Affichage des graphics
 		//Efface la fenetre
 		window.clear();
 
 		//Affiche la fenetre
 		window.display();
-#pragma endregion
 
 	}
 	return 0;
