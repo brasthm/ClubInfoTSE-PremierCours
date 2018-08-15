@@ -1,13 +1,17 @@
 #ifndef ENTITE_H
 #define ENTITE_H
+
 #include "spriteAnimer.h"
-#include"constantes.h"
+#include "constantes.h"
+#include <memory>
+
 
 #pragma region ComportementAttaque
 //Comportement d'attaque pour les entites
 class IComportementAttaque
 {
 public:
+    virtual ~IComportementAttaque() = default;
 	virtual void attaque(const sf::Time& elapsedTime) = 0;
 	virtual void draw(sf::RenderWindow& window) = 0;
 };
@@ -42,7 +46,7 @@ public:
 };
 #pragma endregion
 
-//Class regroupant le minimum pour avoir une entité
+//Class regroupant le minimum pour avoir une entitÃ©
 class IEntite
 {
 protected :
@@ -55,8 +59,9 @@ protected :
 	std::unique_ptr<IComportementAttaque> _comportementAttaque;
 
 public :
-	IEntite(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque):_spriteAnimer(std::make_unique<SpriteAnimer>(spriteanimer)), _pvMax(PvMax), _degat(Degat), _pvActuel(PvMax), _position(0,0), _comportementAttaque(std::make_unique<IComportementAttaque>(comportementattaque)){}
-	virtual void hurt(const unsigned int& degat);
+	IEntite(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque):_spriteAnimer(std::move(spriteanimer)), _pvMax(PvMax), _degat(Degat), _pvActuel(PvMax), _position(0,0), _comportementAttaque(std::move(comportementattaque)){}
+	virtual ~IEntite() = default;
+    virtual void hurt(const unsigned int& degat);
 	virtual const sf::Vector2u& getPosition() { return _position; }
 	virtual const bool& isCollision(const sf::FloatRect& objet) { return _spriteAnimer->getGlobalBounds().intersects(objet); }
 	virtual const bool& isAlive() { return _isAlive; }
@@ -75,11 +80,12 @@ protected :
 	unsigned int _nbTour = 0;
 	bool _isJumping = false;
 
-	//Méthode non visible aux utilisateur à appeller en permanance ---UTILE ???---
+	//MÃ©thode non visible aux utilisateur Ã  appeller en permanance ---UTILE ???---
 	void gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& objet);
 public:
-	IEntiteMovable(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntite(std::make_unique<SpriteAnimer>(spriteanimer), PvMax, Degat, std::make_unique<IComportementAttaque>(comportementattaque)) {}
-	virtual void move(const sf::Time& elapsedTime);
+	IEntiteMovable(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntite(std::move(spriteanimer), PvMax, Degat, std::move(comportementattaque)) {}
+	~IEntiteMovable() override = default;
+    virtual void move(const sf::Time& elapsedTime);
 	virtual void jump() { _isJumping = true; }
 };
 

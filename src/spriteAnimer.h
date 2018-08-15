@@ -1,8 +1,10 @@
 #ifndef SPRITE_ANIMER_H
 #define SPRITE_ANIMER_H
-#include <SFML/Graphics.hpp>
 
-//Class dont le but est de gérer plusieur sprite pour faire un sprite animé
+#include <SFML/Graphics.hpp>
+#include <vector>
+
+//Class dont le but est de gÃ©rer plusieur sprite pour faire un sprite animÃ©
 class SpriteAnimer
 {
 private:
