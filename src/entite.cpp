@@ -6,7 +6,7 @@ void AttaqueCaster::shoot(const sf::Time& elapsedTime)
 	_shootProgression += elapsedTime;
 	if (_shootProgression >= _shootDelay)
 	{
-		_projectiles.push_back(std::make_unique<SpriteAnimer>(new SpriteAnimer(_projectilesSprite, _swapRateProjectiles)));
+		_projectiles.push_back(std::make_unique<SpriteAnimer>(_projectilesSprite, _swapRateProjectiles));
 		_shootProgression = sf::Time::Zero;
 	}
 
@@ -41,7 +41,7 @@ void IEntite::hurt(const unsigned int& degat)
 	}	
 }
 
-//L'entite saute avec une accélération de base, la gravité la fait redessendre. l'objet attendu est le sol
+//L'entite saute avec une accÃ©lÃ©ration de base, la gravitÃ© la fait redessendre. l'objet attendu est le sol
 void IEntiteMovable::gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& sol)
 {
 	if (isCollision(sol))
@@ -61,7 +61,7 @@ void IEntiteMovable::gestionPositionY(const sf::Time& elapsedTime, const sf::Flo
 		_position.y -= elapsedTime.asSeconds()*_gravite;
 }
 
-//l'entité bouge dans les limites de la fenetre
+//l'entitÃ© bouge dans les limites de la fenetre
 void IEntiteMovable::move(const sf::Time& elapsedTime)
 {
 	unsigned int newPosition = _position.x + elapsedTime.asSeconds() * _speedX;
@@ -71,8 +71,7 @@ void IEntiteMovable::move(const sf::Time& elapsedTime)
 		_position.x = WINDOW_SIZE_X - _spriteAnimer->getSize().x;
 }
 
-
-Player::Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntiteMovable(std::make_unique<SpriteAnimer>(spriteanimer), PvMax, Degat, std::make_unique<IComportementAttaque>(comportementattaque))
+Player::Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntiteMovable(std::move(spriteanimer), PvMax, Degat, std::move(comportementattaque))
 {
 
 }
