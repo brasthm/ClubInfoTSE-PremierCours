@@ -5,14 +5,14 @@
 // à swapRate alors on change le sprite qui sera dessiné
 void SpriteAnimer::Animer(const sf::Time& elapsedTime)
 {
-	swapProgression += elapsedTime;
-	if (swapProgression >= swapRate)
+	swapProgression_ += elapsedTime;
+	if (swapProgression_ >= swapRate_)
 	{
-		if (idSprite == sprites.size()-1)
-			idSprite = 0; 
+		if (idSprite_ == sprites_.size()-1)
+			idSprite_ = 0; 
 		else
-			idSprite++;
-		spriteDrawable = sprites[idSprite];
-		swapProgression = sf::Time::Zero;
+			idSprite_++;
+		spriteDrawable_ = sprites_[idSprite_];
+		swapProgression_ = sf::Time::Zero;
 	}
 }

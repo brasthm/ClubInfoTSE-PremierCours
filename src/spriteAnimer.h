@@ -8,18 +8,18 @@
 class SpriteAnimer
 {
 private:
-	std::vector<sf::Sprite> sprites;
-	sf::Sprite spriteDrawable;
-	sf::Time swapRate;
-	sf::Time swapProgression;
-	size_t idSprite;
+	std::vector<sf::Sprite> sprites_;
+	sf::Sprite spriteDrawable_;
+	sf::Time swapRate_;
+	sf::Time swapProgression_;
+	size_t idSprite_ =0;
 	
 public:
-	SpriteAnimer(std::vector<sf::Sprite>& spriteVector, sf::Time swaprate) : sprites(spriteVector), swapRate(swaprate) {}
+	SpriteAnimer(std::vector<sf::Sprite>& spriteVector, sf::Time swaprate) : sprites_(spriteVector), swapRate_(swaprate) {}
 	void Animer(const sf::Time& elapsedTime);
-	void draw(sf::RenderWindow& window) { window.draw(spriteDrawable);}
-	sf::Vector2u getSize() { return spriteDrawable.getTexture()->getSize(); }
-	sf::FloatRect getGlobalBounds() { return spriteDrawable.getGlobalBounds(); }
+	void draw(sf::RenderWindow& window) { window.draw(spriteDrawable_);}
+	sf::Vector2u getSize() { return spriteDrawable_.getTexture()->getSize(); }
+	sf::FloatRect getGlobalBounds() { return spriteDrawable_.getGlobalBounds(); }
 };
 
 #endif // !SPRITE_ANIMER_H
