@@ -2,9 +2,13 @@ add_executable(${PROJECT_NAME}
         constantes.h
         entite.h
         entite.cpp
+        initSprite.h
+        initSprite.cpp
         main.cpp
         spriteAnimer.h
         spriteAnimer.cpp
+        Utils.h
+        Utils.cpp
     )
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_14)
