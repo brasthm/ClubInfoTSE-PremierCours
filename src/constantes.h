@@ -8,6 +8,7 @@ static constexpr unsigned int WINDOW_SIZE_X = 800;
 //Taille max de la fenetre de rendu en y
 static constexpr unsigned int WINDOW_SIZE_Y = 600;
 
+//Nombre d'image du joueur
 static constexpr size_t NOMBRE_IMAGE_PLAYER = 8;
 
 //Enum des bonus
