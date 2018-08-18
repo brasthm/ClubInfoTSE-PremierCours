@@ -14,6 +14,9 @@ enum Bonus
 
 //Enum des malus
 enum Malus
-{SLOW, LOW, WEAK};
+{SLOW, LOWHP, WEAK};
+
+//Chemin vers les images du player run
+static const std::string RUNNING_PLAYER_PATH = "../../img/player/run/";
 
 #endif // !CONSTANTES_H

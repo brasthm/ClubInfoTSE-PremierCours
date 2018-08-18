@@ -1,28 +1,28 @@
 #include "entite.h"
 #include "constantes.h"
 
-void AttaqueCaster::shoot(const sf::Time& elapsedTime)
+void AttaqueCaster::attaque(const sf::Time& elapsedTime)
 {
-	_shootProgression += elapsedTime;
-	if (_shootProgression >= _shootDelay)
+	shootProgression_ += elapsedTime;
+	if (shootProgression_ >= shootDelay_)
 	{
-		_projectiles.push_back(std::make_unique<SpriteAnimer>(_projectilesSprite, _swapRateProjectiles));
-		_shootProgression = sf::Time::Zero;
+		projectiles_.push_back(std::make_unique<SpriteAnimer>(projectilesSprite_, swapRateProjectiles_));
+		shootProgression_ = sf::Time::Zero;
 	}
 
 }
 
 void AttaqueCaster::draw(sf::RenderWindow& window)
 {
-	for (size_t i = 0; i < _projectiles.size(); i++)
-		_projectiles[i]->draw(window);
+	for (size_t i = 0; i < projectiles_.size(); i++)
+		projectiles_[i]->draw(window);
 }
 
-void AttaqueCac::shoot(const sf::Time& elapsedTime)
+void AttaqueCac::attaque(const sf::Time& elapsedTime)
 {
-	_attaqueProgression += elapsedTime;
-	if (_attaqueProgression >= _attaqueDelay)
-		_attaqueProgression = sf::Time::Zero;
+	attaqueProgression_ += elapsedTime;
+	if (attaqueProgression_ >= attaqueDelay_)
+		attaqueProgression_ = sf::Time::Zero;
 }
 
 void AttaqueCac::draw(sf::RenderWindow& window)
@@ -32,12 +32,12 @@ void AttaqueCac::draw(sf::RenderWindow& window)
 
 void IEntite::hurt(const unsigned int& degat)
 {
-	if (_pvActuel - degat > 0)
-		_pvActuel -= degat;
+	if (pvActuel_ - degat > 0)
+		pvActuel_ -= degat;
 	else
 	{
-		_pvActuel = 0;
-		_isAlive = false;
+		pvActuel_ = 0;
+		isAlive_ = false;
 	}	
 }
 
@@ -46,29 +46,29 @@ void IEntiteMovable::gestionPositionY(const sf::Time& elapsedTime, const sf::Flo
 {
 	if (isCollision(sol))
 	{
-		_isOnGround = true;
-		_isJumping = false;
-		_nbTour = 0;
+		isOnGround_ = true;
+		isJumping_ = false;
+		nbTour_ = 0;
 	}
 
-	if (_isJumping)
+	if (isJumping_)
 	{
-		_nbTour++;
-		_position.y -= elapsedTime.asSeconds()*(_speedY - _gravite * _nbTour);
+		nbTour_++;
+		position_.y -=  (unsigned int)(elapsedTime.asSeconds()*(speedY_ - gravite_ * nbTour_));
 	}
 
-	if (!_isOnGround)
-		_position.y -= elapsedTime.asSeconds()*_gravite;
+	if (!isOnGround_)
+		position_.y -= (unsigned int)(elapsedTime.asSeconds()*gravite_);
 }
 
 //l'entité bouge dans les limites de la fenetre
 void IEntiteMovable::move(const sf::Time& elapsedTime)
 {
-	unsigned int newPosition = _position.x + elapsedTime.asSeconds() * _speedX;
+	unsigned int newPosition = position_.x + (unsigned int)(elapsedTime.asSeconds() * speedX_);
 	if (newPosition <= WINDOW_SIZE_X)
-		_position.x = newPosition;
+		position_.x = newPosition;
 	else
-		_position.x = WINDOW_SIZE_X - _spriteAnimer->getSize().x;
+		position_.x = WINDOW_SIZE_X - spriteAnimer_->getSize().x;
 }
 
 Player::Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntiteMovable(std::move(spriteanimer), PvMax, Degat, std::move(comportementattaque))
@@ -76,10 +76,10 @@ Player::Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, u
 
 }
 
-void Player::heal(unsigned int heal)
+void Player::heal(const unsigned int heal)
 {
-	unsigned int newPv = _pvActuel + heal;
-	_pvActuel = (newPv > _pvMax)? _pvMax : newPv;
+	unsigned int newPv = pvActuel_ + heal;
+	pvActuel_ = (newPv > pvMax_)? pvMax_ : newPv;
 }
 
 
