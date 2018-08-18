@@ -57,12 +57,12 @@ protected :
 	std::unique_ptr<IComportementAttaque> comportementAttaque_;
 
 public :
-	IEntite(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque):spriteAnimer_(std::move(spriteanimer)), pvMax_(PvMax), degat_(Degat), pvActuel_(PvMax), position_(0,0), comportementAttaque_(std::move(comportementattaque)){}
+	IEntite(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque):spriteAnimer_(std::move(spriteanimer)), pvMax_(PvMax), pvActuel_(PvMax), degat_(Degat), comportementAttaque_(std::move(comportementattaque)){}
 	virtual ~IEntite() = default;
     virtual void hurt(const unsigned int& degat);
 	virtual const sf::Vector2u& getPosition() { return position_; }
-	virtual const bool isCollision(const sf::FloatRect& objet) { return spriteAnimer_->getGlobalBounds().intersects(objet); }
-	virtual const bool isAlive() { return isAlive_; }
+	virtual bool isCollision(const sf::FloatRect& objet) { return spriteAnimer_->getGlobalBounds().intersects(objet); }
+	virtual bool isAlive() { return isAlive_; }
 	virtual void draw(sf::RenderWindow& window, const sf::Time& elapsedTime) { spriteAnimer_->Animer(elapsedTime); spriteAnimer_->draw(window); comportementAttaque_->draw(window); }
 	virtual void attaque(const sf::Time& elapsedTime) { comportementAttaque_->attaque(elapsedTime); }
 };
