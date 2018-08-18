@@ -61,8 +61,8 @@ public :
 	virtual ~IEntite() = default;
     virtual void hurt(const unsigned int& degat);
 	virtual const sf::Vector2u& getPosition() { return position_; }
-	virtual const bool& isCollision(const sf::FloatRect& objet) { return spriteAnimer_->getGlobalBounds().intersects(objet); }
-	virtual const bool& isAlive() { return isAlive_; }
+	virtual const bool isCollision(const sf::FloatRect& objet) { return spriteAnimer_->getGlobalBounds().intersects(objet); }
+	virtual const bool isAlive() { return isAlive_; }
 	virtual void draw(sf::RenderWindow& window, const sf::Time& elapsedTime) { spriteAnimer_->Animer(elapsedTime); spriteAnimer_->draw(window); comportementAttaque_->draw(window); }
 	virtual void attaque(const sf::Time& elapsedTime) { comportementAttaque_->attaque(elapsedTime); }
 };
