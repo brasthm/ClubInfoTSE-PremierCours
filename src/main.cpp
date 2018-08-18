@@ -28,7 +28,7 @@ int main()
 		clock.restart();
 		
 		//Création d'un objet récupérant les événements (touche clavier et autre)
-		sf::Event event;
+		sf::Event event{};
 
 		//Boucle des évennements
 		while (window.pollEvent(event))

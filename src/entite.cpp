@@ -14,8 +14,8 @@ void AttaqueCaster::attaque(const sf::Time& elapsedTime)
 
 void AttaqueCaster::draw(sf::RenderWindow& window)
 {
-	for (size_t i = 0; i < projectiles_.size(); i++)
-		projectiles_[i]->draw(window);
+	for(auto& projectile : projectiles_)
+        projectile->draw(window);
 }
 
 void AttaqueCac::attaque(const sf::Time& elapsedTime)

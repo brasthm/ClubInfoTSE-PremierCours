@@ -27,8 +27,8 @@ protected:
 
 public:
 	AttaqueCaster(sf::Time shootDelay, std::vector<sf::Sprite>& sprites, sf::Time swap) : shootDelay_(shootDelay), projectilesSprite_(sprites), swapRateProjectiles_(swap) {}
-	void attaque(const sf::Time& elapsedTime);
-	void draw(sf::RenderWindow& window);
+	void attaque(const sf::Time& elapsedTime) override;
+	void draw(sf::RenderWindow& window) override;
 };
 
 class AttaqueCac : public IComportementAttaque
@@ -39,8 +39,8 @@ protected:
 	std::vector<sf::Sprite> attaqueSprite_; //utile ??
 public:
 	AttaqueCac(sf::Time attaqueDelay, std::vector<sf::Sprite>& sprites) : attaqueDelay_(attaqueDelay), attaqueSprite_(sprites){}
-	void attaque(const sf::Time& elapsedTime);
-	void draw(sf::RenderWindow& window);
+	void attaque(const sf::Time& elapsedTime) override;
+	void draw(sf::RenderWindow& window) override;
 
 };
 
@@ -97,7 +97,7 @@ public :
 	Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque);
 	void setBonus(const Bonus& bonus) { bonusVector_.push_back(bonus); }
 	void setMalus(const Malus& malus) { malusVector_.push_back(malus); }
-	void heal(const unsigned int heal);
+	void heal(unsigned int heal);
 };
 
 #endif // !ENTITE_H
