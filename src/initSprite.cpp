@@ -3,6 +3,8 @@
 
 InitialiseurDeSprite::InitialiseurDeSprite() 
 {
+	TexturePlayer_.reserve(NOMBRE_IMAGE_PLAYER);
+	TextureAttaquePlayer_.reserve(5);
 	initialiserSpritePlayer();
 	initialiserSpriteAttaquePlayer();
 }
@@ -10,7 +12,7 @@ InitialiseurDeSprite::InitialiseurDeSprite()
 //initialise le sprite du joueur
 void InitialiseurDeSprite::initialiserSpritePlayer()
 {
-	for (unsigned int i = 1; i < 9; i++)
+	for (unsigned int i = 1; i < NOMBRE_IMAGE_PLAYER+1; i++)
 	{
 		std::string chemin = RUNNING_PLAYER_PATH + "player_run";
 		chemin.append(intToString(i)+".png");
