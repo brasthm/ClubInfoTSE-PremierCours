@@ -10,7 +10,7 @@ int main()
 	
 	//initialisation du joueur
 	std::vector<sf::Sprite> spritesPlayer = initSprite.getSpritePlayer();
-	std::unique_ptr<SpriteAnimer> spriteAnimerPlayer = std::make_unique<SpriteAnimer>(spritesPlayer, sf::Time(sf::milliseconds(1000)));
+	std::unique_ptr<SpriteAnimer> spriteAnimerPlayer = std::make_unique<SpriteAnimer>(spritesPlayer, sf::Time(sf::milliseconds(333)));
 	std::vector<sf::Sprite> spritesAttaque = initSprite.getSpriteAttaquePlayer();
 	std::unique_ptr<IComportementAttaque> cmptAttPlayer = std::make_unique<AttaqueCaster>(sf::Time(sf::seconds(0.5)),spritesAttaque,sf::Time(sf::milliseconds(333)));
 	Player player(std::move(spriteAnimerPlayer),100,10,std::move(cmptAttPlayer));
@@ -25,7 +25,8 @@ int main()
 	while (window.isOpen())
 	{
 		sf::Time elapsedTime = clock.getElapsedTime();
-
+		clock.restart();
+		
 		//Création d'un objet récupérant les événements (touche clavier et autre)
 		sf::Event event;
 
