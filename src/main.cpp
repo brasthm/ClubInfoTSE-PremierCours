@@ -3,6 +3,7 @@
 #include"initSprite.h"
 #include"entite.h"
 #include "constantes.h"
+#include "background.h"
 
 int main()
 {
@@ -14,6 +15,10 @@ int main()
 	std::vector<sf::Sprite> spritesAttaque = initSprite.getSpriteAttaquePlayer();
 	std::unique_ptr<IComportementAttaque> cmptAttPlayer = std::make_unique<AttaqueCaster>(sf::Time(sf::seconds(0.5)),spritesAttaque,sf::Time(sf::milliseconds(333)));
 	Player player(std::move(spriteAnimerPlayer),100,10,std::move(cmptAttPlayer));
+
+	//initialisation du fond
+	Background backgound;
+	backgound.init(BACKGROUND_PATH + "test/test", 4);
 
 	//Création de la fenetre du jeux
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
@@ -41,6 +46,8 @@ int main()
 		//Efface la fenetre
 		window.clear();
 
+
+		backgound.draw(window, elapsedTime);
 		player.draw(window, elapsedTime);
 
 		//Affiche la fenetre

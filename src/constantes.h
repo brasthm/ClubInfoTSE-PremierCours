@@ -11,6 +11,9 @@ static constexpr unsigned int WINDOW_SIZE_Y = 600;
 //Nombre d'image du joueur
 static constexpr size_t NOMBRE_IMAGE_PLAYER = 8;
 
+//Nombre maximum de texture pour le fond
+static constexpr size_t BG_TEXTURE_MAX = 10;
+
 //Enum des bonus
 enum Bonus
 {SPEED, SHIELD, FURY};
@@ -21,5 +24,6 @@ enum Malus
 
 //Chemin vers les images du player run
 static const std::string RUNNING_PLAYER_PATH = "../../img/player/run/";
+static const std::string BACKGROUND_PATH = "../../img/bg/";
 
 #endif // !CONSTANTES_H
