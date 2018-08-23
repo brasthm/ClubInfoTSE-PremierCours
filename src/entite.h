@@ -52,7 +52,7 @@ protected :
 	unsigned int pvMax_ = 100;
 	unsigned int pvActuel_ = 100;
 	unsigned int degat_ = 10;
-	sf::Vector2u position_ = sf::Vector2u(0,0);
+	sf::Vector2f position_ = sf::Vector2f(0,260);
 	bool isAlive_ = true;
 	std::unique_ptr<IComportementAttaque> comportementAttaque_;
 
@@ -60,31 +60,35 @@ public :
 	IEntite(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque):spriteAnimer_(std::move(spriteanimer)), pvMax_(PvMax), pvActuel_(PvMax), degat_(Degat), comportementAttaque_(std::move(comportementattaque)){}
 	virtual ~IEntite() = default;
     virtual void hurt(const unsigned int& degat);
-	virtual const sf::Vector2u& getPosition() { return position_; }
+	virtual const sf::Vector2f& getPosition() { return position_; }
 	virtual bool isCollision(const sf::FloatRect& objet) { return spriteAnimer_->getGlobalBounds().intersects(objet); }
-	virtual bool isAlive() { return isAlive_; }
+	virtual bool isAlive();
 	virtual void draw(sf::RenderWindow& window, const sf::Time& elapsedTime) { spriteAnimer_->Animer(elapsedTime); spriteAnimer_->draw(window); comportementAttaque_->draw(window); }
 	virtual void attaque(const sf::Time& elapsedTime) { comportementAttaque_->attaque(elapsedTime); }
+	virtual void setPositionSprite(sf::Vector2f position);
 };
 
 //Entite pouvant sauter et se deplacer
 class IEntiteMovable: public IEntite
 {
 protected : 
-	unsigned int speedX_ = 100;
-	unsigned int gravite_ = 10;
-	unsigned int speedY_ = 100;
+	unsigned int speedX_ = 8000;
+	unsigned int gravite_ = 800;
+	unsigned int speedY_ = 1600;
 	bool isOnGround_ = true;
-	unsigned int nbTour_ = 0;
 	bool isJumping_ = false;
+	sf::Time jumpProgression_;
+	sf::Time jumpRate = sf::milliseconds(1000);
+	sf::Time jumpTime_= sf::milliseconds(500);
 
-	//Méthode non visible aux utilisateur à appeller en permanance ---UTILE ???---
-	void gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& objet);
 public:
 	IEntiteMovable(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntite(std::move(spriteanimer), PvMax, Degat, std::move(comportementattaque)) {}
 	~IEntiteMovable() override = default;
-    virtual void move(const sf::Time& elapsedTime);
-	virtual void jump() { isJumping_ = true; }
+    virtual void moveLeft(const sf::Time& elapsedTime);
+	virtual void moveRight(const sf::Time& elapsedTime);
+	virtual void jump() { isJumping_ = true; isOnGround_ = false; }
+	//Méthode à appeller en permanance ---UTILE ???---
+	void gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& ground);
 };
 
 //Class Player avec les methodes de base non redefinie, ne PAS heriter

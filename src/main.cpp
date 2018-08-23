@@ -20,6 +20,11 @@ int main()
 	Background backgound;
 	backgound.init(BACKGROUND_PATH + "test/test", 4);
 
+	sf::RectangleShape sol;
+	sol.setSize({ 800,100 });
+	sol.setPosition(0, 500);
+	sol.setFillColor(sf::Color::White);
+
 	//Création de la fenetre du jeux
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
 	
@@ -31,9 +36,9 @@ int main()
 	{
 		sf::Time elapsedTime = clock.getElapsedTime();
 		clock.restart();
-		
+
 		//Création d'un objet récupérant les événements (touche clavier et autre)
-		sf::Event event{};
+		sf::Event event {};
 
 		//Boucle des évennements
 		while (window.pollEvent(event))
@@ -41,18 +46,44 @@ int main()
 			//Evenement de fermeture de la fenetre : on ferme le jeux
 			if (event.type == sf::Event::Closed)
 				window.close();
+
+			//Evenement clavier
+			if (event.type == sf::Event::KeyPressed)
+			{
+				//Evenement de saut
+				if (event.key.code == sf::Keyboard::Space)
+					player.jump();
+
+				//Evenement de deplacement lateral
+				if (event.key.code == sf::Keyboard::D)
+					player.moveRight(elapsedTime);
+
+				//Evenement de deplacement lateral
+				if (event.key.code == sf::Keyboard::Q)
+					player.moveLeft(elapsedTime);
+			}
+
+			//POUR DEBUG 
+			if (event.type == sf::Event::MouseButtonPressed)
+				if (event.mouseButton.button == sf::Mouse::Right)
+				{
+					std::cout << "position : " << player.getPosition().x << ", " << player.getPosition().y << std::endl;
+				}
+
 		}
 
+		player.gestionPositionY(elapsedTime, sol.getGlobalBounds());
+
+		//----Zone d'affichage----//
 		//Efface la fenetre
 		window.clear();
 
-
 		backgound.draw(window, elapsedTime);
 		player.draw(window, elapsedTime);
+		window.draw(sol);
 
 		//Affiche la fenetre
 		window.display();
-
 	}
 	return 0;
 
