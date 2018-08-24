@@ -30,6 +30,13 @@ void AttaqueCac::draw(sf::RenderWindow& window)
 	//draw annimation ? sprites ? rien ?
 }
 
+//Teste si l'entite est en vie, vérifie la position gauche et basse ainsi que les pv
+bool IEntite::isAlive() {
+	if (position_.x < -100 || position_.y > WINDOW_SIZE_Y || pvActuel_ <=0)
+		isAlive_ = false;
+	return isAlive_; 
+}
+
 void IEntite::hurt(const unsigned int& degat)
 {
 	if (pvActuel_ - degat > 0)
@@ -41,34 +48,58 @@ void IEntite::hurt(const unsigned int& degat)
 	}	
 }
 
-//L'entite saute avec une accélération de base, la gravité la fait redessendre. l'objet attendu est le sol
+void IEntite::setPositionSprite(sf::Vector2f position)
+{
+	if (position.x <= WINDOW_SIZE_X || position.x >= 0 || position.y <= WINDOW_SIZE_Y || position.y >= 0)
+		spriteAnimer_->setPosition(position);
+}
+
+//L'entite saute avec une accélération de base, la gravité la fait redessendre. l'objet attendu est le sol. peut depasser par le haut
 void IEntiteMovable::gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& sol)
 {
-	if (isCollision(sol))
-	{
-		isOnGround_ = true;
-		isJumping_ = false;
-		nbTour_ = 0;
-	}
-
 	if (isJumping_)
 	{
-		nbTour_++;
-		position_.y -=  (unsigned int)(elapsedTime.asSeconds()*(speedY_ - gravite_ * nbTour_));
+		jumpProgression_ += elapsedTime;
+		if (jumpProgression_ < jumpTime_)
+			position_.y -= elapsedTime.asSeconds()*speedY_;
+		else if(jumpProgression_ >= jumpRate)
+		{
+			jumpProgression_ = sf::Time::Zero;
+			isJumping_ = false;
+		}
 	}
 
 	if (!isOnGround_)
-		position_.y -= (unsigned int)(elapsedTime.asSeconds()*gravite_);
+		position_.y += (elapsedTime.asSeconds()*gravite_);
+
+	isOnGround_ = isCollision(sol);
+
+	if (isOnGround_)
+		position_.y = sol.top - spriteAnimer_->getSize().y; //getSize fct ici car on cale par le bas 
+
+	setPositionSprite(position_);
 }
 
 //l'entité bouge dans les limites de la fenetre
-void IEntiteMovable::move(const sf::Time& elapsedTime)
+void IEntiteMovable::moveLeft(const sf::Time& elapsedTime)
 {
-	unsigned int newPosition = position_.x + (unsigned int)(elapsedTime.asSeconds() * speedX_);
-	if (newPosition <= WINDOW_SIZE_X)
+	float newPosition = position_.x - (elapsedTime.asSeconds() * speedX_);
+	if (newPosition >= 0)
 		position_.x = newPosition;
 	else
-		position_.x = WINDOW_SIZE_X - spriteAnimer_->getSize().x;
+		position_.x = 0;
+	setPositionSprite(position_);
+}
+
+//l'entité bouge dans les limites de la fenetre
+void IEntiteMovable::moveRight(const sf::Time& elapsedTime)
+{
+	float newPosition = position_.x + (elapsedTime.asSeconds() * speedX_);
+	if (newPosition + spriteAnimer_->getSize().x <= WINDOW_SIZE_X)
+		position_.x = newPosition;
+	else
+		position_.x = (float)WINDOW_SIZE_X - spriteAnimer_->getSize().x;
+	setPositionSprite(position_);
 }
 
 Player::Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntiteMovable(std::move(spriteanimer), PvMax, Degat, std::move(comportementattaque))
