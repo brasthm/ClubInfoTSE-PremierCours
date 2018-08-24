@@ -18,7 +18,11 @@ int main()
 
 	//initialisation du fond
 	Background backgound;
-	backgound.init(BACKGROUND_PATH + "test/test", 4);
+	backgound.init(BACKGROUND_PATH + "grassland/bg-grass", 4);
+	backgound.setSpeed(0, 0);
+	backgound.setSpeed(1, -20);
+	backgound.setSpeed(2, -40);
+	backgound.setSpeed(3, -20);
 
 	//Création de la fenetre du jeux
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
