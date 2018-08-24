@@ -74,7 +74,8 @@ class IEntiteMovable: public IEntite
 protected : 
 	unsigned int speedX_ = 8000;
 	unsigned int gravite_ = 800;
-	unsigned int speedY_ = 1600;
+	int speedY_ = 1600;
+	int vspeed_;
 	bool isOnGround_ = true;
 	bool isJumping_ = false;
 	sf::Time jumpProgression_;
@@ -86,7 +87,7 @@ public:
 	~IEntiteMovable() override = default;
     virtual void moveLeft(const sf::Time& elapsedTime);
 	virtual void moveRight(const sf::Time& elapsedTime);
-	virtual void jump() { isJumping_ = true; isOnGround_ = false; }
+	virtual void jump() { isJumping_ = true; isOnGround_ = false; vspeed_ = -speedY_; }
 	//Méthode à appeller en permanance ---UTILE ???---
 	void gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& ground);
 };

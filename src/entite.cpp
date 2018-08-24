@@ -57,25 +57,21 @@ void IEntite::setPositionSprite(sf::Vector2f position)
 //L'entite saute avec une accélération de base, la gravité la fait redessendre. l'objet attendu est le sol. peut depasser par le haut
 void IEntiteMovable::gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& sol)
 {
+	float gravity = 5000;
 	if (isJumping_)
 	{
-		jumpProgression_ += elapsedTime;
-		if (jumpProgression_ < jumpTime_)
-			position_.y -= elapsedTime.asSeconds()*speedY_;
-		else if(jumpProgression_ >= jumpRate)
-		{
-			jumpProgression_ = sf::Time::Zero;
-			isJumping_ = false;
-		}
+		position_.y += elapsedTime.asSeconds()*vspeed_;
+		vspeed_ += elapsedTime.asSeconds()*gravity;
 	}
-
-	if (!isOnGround_)
-		position_.y += (elapsedTime.asSeconds()*gravite_);
 
 	isOnGround_ = isCollision(sol);
 
 	if (isOnGround_)
+	{
+		isJumping_ = false;
 		position_.y = sol.top - spriteAnimer_->getSize().y; //getSize fct ici car on cale par le bas 
+	}
+		
 
 	setPositionSprite(position_);
 }
