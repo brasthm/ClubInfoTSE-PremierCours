@@ -6,7 +6,7 @@ void AttaqueCaster::attaque(const sf::Time& elapsedTime)
 	shootProgression_ += elapsedTime;
 	if (shootProgression_ >= shootDelay_)
 	{
-		projectiles_.push_back(std::make_unique<AnimatedSprite>(projectilesSprite_, swapRateProjectiles_));
+		projectiles_.push_back(new AnimatedSprite(projectilesSprite_, swapRateProjectiles_));
 		shootProgression_ = sf::Time::Zero;
 	}
 

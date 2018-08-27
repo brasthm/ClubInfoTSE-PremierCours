@@ -22,6 +22,7 @@ public:
 	sf::Vector2u getSize() { return spriteDrawable_.getTexture()->getSize(); }
 	sf::FloatRect getGlobalBounds() { return spriteDrawable_.getGlobalBounds(); }
 	void setPosition(sf::Vector2f position) { position_ = position; }
+	~AnimatedSprite(){}
 };
 
 #endif // !SPRITE_ANIMER_H

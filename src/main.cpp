@@ -11,10 +11,10 @@ int main()
 	
 	//initialisation du joueur
 	std::vector<sf::Sprite> spritesPlayer = initSprite.getSpritePlayer();
-	AnimatedSprite spriteAnimerPlayer = AnimatedSprite(spritesPlayer, sf::milliseconds(100));
+	AnimatedSprite* spriteAnimerPlayer = new AnimatedSprite(spritesPlayer, sf::milliseconds(100));
 	std::vector<sf::Sprite> spritesAttaque = initSprite.getSpriteAttaquePlayer();
 	IComportementAttaque* cmptAttPlayer = new AttaqueCaster(sf::seconds(0.5),spritesAttaque,sf::milliseconds(333));
-	Player player(&spriteAnimerPlayer,100,10,cmptAttPlayer);
+	Player player(spriteAnimerPlayer,100,10,cmptAttPlayer);
 
 	//initialisation du fond
 	Background backgound;
