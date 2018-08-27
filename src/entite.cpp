@@ -6,7 +6,7 @@ void AttaqueCaster::attaque(const sf::Time& elapsedTime)
 	shootProgression_ += elapsedTime;
 	if (shootProgression_ >= shootDelay_)
 	{
-		projectiles_.push_back(std::make_unique<SpriteAnimer>(projectilesSprite_, swapRateProjectiles_));
+		projectiles_.push_back(std::make_unique<AnimatedSprite>(projectilesSprite_, swapRateProjectiles_));
 		shootProgression_ = sf::Time::Zero;
 	}
 
@@ -16,6 +16,12 @@ void AttaqueCaster::draw(sf::RenderWindow& window)
 {
 	for(auto& projectile : projectiles_)
         projectile->draw(window);
+}
+
+AttaqueCaster::~AttaqueCaster()
+{
+	for (auto& projectile : projectiles_)
+		delete projectile;
 }
 
 void AttaqueCac::attaque(const sf::Time& elapsedTime)
@@ -52,6 +58,12 @@ void IEntite::setPositionSprite(sf::Vector2f position)
 {
 	if (position.x <= WINDOW_SIZE_X || position.x >= 0 || position.y <= WINDOW_SIZE_Y || position.y >= 0)
 		spriteAnimer_->setPosition(position);
+}
+
+IEntite::~IEntite()
+{
+	delete spriteAnimer_;
+	delete comportementAttaque_;
 }
 
 //Déclenche un saut si l'on ne saute pas déjà
@@ -106,11 +118,6 @@ void IEntiteMovable::moveRight(const sf::Time& elapsedTime)
 	else
 		position_.x = (float)WINDOW_SIZE_X - spriteAnimer_->getSize().x;
 	setPositionSprite(position_);
-}
-
-Player::Player(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntiteMovable(std::move(spriteanimer), PvMax, Degat, std::move(comportementattaque))
-{
-
 }
 
 void Player::heal(const unsigned int heal)

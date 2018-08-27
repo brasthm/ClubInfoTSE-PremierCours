@@ -5,7 +5,7 @@
 #include <vector>
 
 //Class dont le but est de gérer plusieur sprite pour faire un sprite animé
-class SpriteAnimer
+class AnimatedSprite
 {
 private:
 	std::vector<sf::Sprite> sprites_;
@@ -16,7 +16,7 @@ private:
 	sf::Vector2f position_ = { 0,0 };
 	
 public:
-	SpriteAnimer(std::vector<sf::Sprite>& spriteVector, sf::Time swaprate) : sprites_(spriteVector), swapRate_(swaprate) {}
+	AnimatedSprite(std::vector<sf::Sprite>& spriteVector, sf::Time swaprate) : sprites_(spriteVector), swapRate_(swaprate) {}
 	void Animer(const sf::Time& elapsedTime);
 	void draw(sf::RenderWindow& window) { spriteDrawable_.setPosition(position_); window.draw(spriteDrawable_); }
 	sf::Vector2u getSize() { return spriteDrawable_.getTexture()->getSize(); }
