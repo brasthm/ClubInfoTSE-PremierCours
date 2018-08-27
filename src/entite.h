@@ -72,9 +72,9 @@ public :
 class IEntiteMovable: public IEntite
 {
 protected : 
-	unsigned int speedX_ = 8000;
+	unsigned int speedX_ = 800;
 	unsigned int gravite_ = 800;
-	int speedY_ = 1600;
+	int speedY_ = 1500;
 	int vspeed_;
 	bool isOnGround_ = true;
 	bool isJumping_ = false;
