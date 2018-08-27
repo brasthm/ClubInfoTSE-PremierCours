@@ -20,7 +20,7 @@ int main()
 	Background backgound;
 	backgound.init(BACKGROUND_PATH + "grassland/bg-grass", 4);
 	backgound.setSpeed(0, 0);
-	backgound.setSpeed(1, -20);
+	backgound.setSpeed(1, -10);
 	backgound.setSpeed(2, -40);
 	backgound.setSpeed(3, -20);
 
@@ -35,6 +35,7 @@ int main()
 	//Création de la clock
 	sf::Clock clock;
 
+	window.setKeyRepeatEnabled(true);
 	//Tant que l'on joue (fenetre ouverte)
 	while (window.isOpen())
 	{
@@ -57,14 +58,6 @@ int main()
 				//Evenement de saut
 				if (event.key.code == sf::Keyboard::Space)
 					player.jump();
-
-				//Evenement de deplacement lateral
-				if (event.key.code == sf::Keyboard::D)
-					player.moveRight(elapsedTime);
-
-				//Evenement de deplacement lateral
-				if (event.key.code == sf::Keyboard::Q)
-					player.moveLeft(elapsedTime);
 			}
 
 			//POUR DEBUG 
@@ -75,6 +68,12 @@ int main()
 				}
 
 		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			player.moveRight(elapsedTime);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+			player.moveLeft(elapsedTime);
 
 		player.gestionPositionY(elapsedTime, sol.getGlobalBounds());
 
@@ -88,6 +87,8 @@ int main()
 
 		//Affiche la fenetre
 		window.display();
+
+		sf::sleep(sf::milliseconds(10));
 	}
 	return 0;
 
