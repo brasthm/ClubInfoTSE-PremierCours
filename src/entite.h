@@ -78,16 +78,13 @@ protected :
 	int vspeed_;
 	bool isOnGround_ = true;
 	bool isJumping_ = false;
-	sf::Time jumpProgression_;
-	sf::Time jumpRate = sf::milliseconds(1000);
-	sf::Time jumpTime_= sf::milliseconds(500);
 
 public:
 	IEntiteMovable(std::unique_ptr<SpriteAnimer> spriteanimer, unsigned int PvMax, unsigned int Degat, std::unique_ptr<IComportementAttaque> comportementattaque) : IEntite(std::move(spriteanimer), PvMax, Degat, std::move(comportementattaque)) {}
 	~IEntiteMovable() override = default;
     virtual void moveLeft(const sf::Time& elapsedTime);
 	virtual void moveRight(const sf::Time& elapsedTime);
-	virtual void jump() { isJumping_ = true; isOnGround_ = false; vspeed_ = -speedY_; }
+	virtual void jump();
 	//Méthode à appeller en permanance ---UTILE ???---
 	void gestionPositionY(const sf::Time& elapsedTime, const sf::FloatRect& ground);
 };
