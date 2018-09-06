@@ -12,9 +12,11 @@ int main()
 	//initialisation du joueur
 	std::vector<sf::Sprite> spritesPlayer = initSprite.getSpritePlayer();
 	AnimatedSprite* spriteAnimerPlayer = new AnimatedSprite(spritesPlayer, sf::milliseconds(100));
-	std::vector<sf::Sprite> spritesAttaque = initSprite.getSpriteAttaquePlayer();
-	IComportementAttaque* cmptAttPlayer = new AttaqueCaster(sf::seconds(0.5),spritesAttaque,sf::milliseconds(333));
-	Player player(spriteAnimerPlayer,100,10,cmptAttPlayer);
+	sf::RectangleShape shapePlayer;
+	shapePlayer.setSize({ 80,100 });
+	shapePlayer.setPosition(0, 160);
+	shapePlayer.setFillColor(sf::Color::Blue);
+	Player player;
 
 	//initialisation du fond
 	Background backgound;
@@ -67,21 +69,12 @@ int main()
 				}
 		}
 
-		//Déplacement 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			player.moveRight(elapsedTime);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			player.moveLeft(elapsedTime);
-
-		player.gestionPositionY(elapsedTime, sol.getGlobalBounds());
-
 		//----Zone d'affichage----//
 		//Efface la fenetre
 		window.clear();
 
 		backgound.draw(window, elapsedTime);
-		player.draw(window, elapsedTime);
+		player.draw(window, spritesPlayer[1]);
 		window.draw(sol);
 
 		//Affiche la fenetre
