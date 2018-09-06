@@ -7,6 +7,12 @@
 
 int main()
 {
+	//init le son
+	sf::Music music;
+	DJ dj(music);
+	dj.playMusicForever(location "../../music/game.ogg");
+
+	//init les skins
 	InitialiseurDeSprite initSprite;
 
 	//création du joueur
