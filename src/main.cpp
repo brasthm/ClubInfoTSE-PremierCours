@@ -12,10 +12,12 @@ int main()
 	//initialisation du joueur
 	std::vector<sf::Sprite> spritesPlayer = initSprite.getSpritePlayer();
 	AnimatedSprite* spriteAnimerPlayer = new AnimatedSprite(spritesPlayer, sf::milliseconds(100));
+
 	sf::RectangleShape shapePlayer;
 	shapePlayer.setSize({ 80,100 });
 	shapePlayer.setPosition(0, 160);
 	shapePlayer.setFillColor(sf::Color::Blue);
+
 	Player player;
 
 	//initialisation du fond
@@ -48,7 +50,7 @@ int main()
 
 		//Boucle des évennements
 		while (window.pollEvent(event))
-		{	
+		{
 			//Evenement de fermeture de la fenetre : on ferme le jeux
 			if (event.type == sf::Event::Closed)
 				window.close();
@@ -61,12 +63,6 @@ int main()
 					player.jump();
 			}
 
-			//POUR DEBUG 
-			if (event.type == sf::Event::MouseButtonPressed)
-				if (event.mouseButton.button == sf::Mouse::Right)
-				{
-					std::cout << "position : " << player.getPosition().x << ", " << player.getPosition().y << std::endl;
-				}
 		}
 
 		//----Zone d'affichage----//
@@ -74,7 +70,7 @@ int main()
 		window.clear();
 
 		backgound.draw(window, elapsedTime);
-		player.draw(window, spritesPlayer[1]);
+		player.draw(window, shapePlayer);
 		window.draw(sol);
 
 		//Affiche la fenetre

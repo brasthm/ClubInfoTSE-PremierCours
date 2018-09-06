@@ -16,13 +16,6 @@ static constexpr size_t BG_TEXTURE_MAX = 10;
 
 //Gravité
 static constexpr float GRAVITY = 5000;
-//Enum des bonus
-enum Bonus
-{SPEED, SHIELD, FURY};
-
-//Enum des malus
-enum Malus
-{SLOW, LOWHP, WEAK};
 
 //Chemin vers les images du player run
 static const std::string RUNNING_PLAYER_PATH = "../../img/player/run/";
