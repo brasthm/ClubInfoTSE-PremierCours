@@ -41,7 +41,6 @@ public:
 	AttaqueCac(sf::Time attaqueDelay, std::vector<sf::Sprite>& sprites) : attaqueDelay_(attaqueDelay), attaqueSprite_(sprites){}
 	void attaque(const sf::Time& elapsedTime) override;
 	void draw(sf::RenderWindow& window) override;
-
 };
 
 //Class regroupant le minimum pour avoir une entité

@@ -35,7 +35,6 @@ int main()
 	//Création de la clock
 	sf::Clock clock;
 
-	window.setKeyRepeatEnabled(true);
 	//Tant que l'on joue (fenetre ouverte)
 	while (window.isOpen())
 	{
@@ -66,9 +65,9 @@ int main()
 				{
 					std::cout << "position : " << player.getPosition().x << ", " << player.getPosition().y << std::endl;
 				}
-
 		}
 
+		//Déplacement 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			player.moveRight(elapsedTime);
 
