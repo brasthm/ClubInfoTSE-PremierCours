@@ -14,7 +14,7 @@ void Track::setTrack(std::string filepath, std::string name)
 DJ::DJ(sf::Music& m) : music_(m)
 {
 	AllTrack_.resize(20);
-	//AllTrack_[0].setTrack(location "path", "name");
+	//AllTrack_[0].setTrack("path", "name");
 }
 
 void DJ::playMusicForever(std::string path) 

@@ -4,13 +4,14 @@
 #include"entite.h"
 #include "constantes.h"
 #include "background.h"
+#include "DJ.hpp"
 
 int main()
 {
 	//init le son
 	sf::Music music;
 	DJ dj(music);
-	dj.playMusicForever(location "../../music/game.ogg");
+	dj.playMusicForever("../../music/game.ogg");
 
 	//init les skins
 	InitialiseurDeSprite initSprite;
@@ -68,7 +69,7 @@ int main()
 		window.clear();
 
 		backgound.draw(window, elapsedTime);
-		player.draw(window, shapePlayer);
+		player.drawRectangle(window);
 		window.draw(sol);
 
 		//Affiche la fenetre
