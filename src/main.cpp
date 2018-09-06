@@ -8,17 +8,9 @@
 int main()
 {
 	InitialiseurDeSprite initSprite;
-	
-	//initialisation du joueur
-	std::vector<sf::Sprite> spritesPlayer = initSprite.getSpritePlayer();
-	AnimatedSprite* spriteAnimerPlayer = new AnimatedSprite(spritesPlayer, sf::milliseconds(100));
 
-	sf::RectangleShape shapePlayer;
-	shapePlayer.setSize({ 80,100 });
-	shapePlayer.setPosition(0, 160);
-	shapePlayer.setFillColor(sf::Color::Blue);
-
-	Player player;
+	//création du joueur
+	Player player(initSprite);
 
 	//initialisation du fond
 	Background backgound;

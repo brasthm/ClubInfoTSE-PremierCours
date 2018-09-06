@@ -1,33 +1,33 @@
 #ifndef ENTITE_H
 #define ENTITE_H
 
+#include "initSprite.h"
 #include "AnimatedSprite.h"
 #include "constantes.h"
 
+//Cyril fait le jump
 class Player
 {
 protected :
 	bool isAlive_ = true;
-	unsigned int gravite_ = 800;
-	int speedY_ = 1500;
-	int vspeed_;
-	bool isOnGround_ = true;
-	bool isJumping_ = false;
-	float positionY_;
+	sf::Vector2f position_;
 	sf::FloatRect contour_;
+	sf::RectangleShape shape_;
+	sf::Sprite sprite_;
+	AnimatedSprite* animatedSprite_;
 
 public :
-	Player(){}
+	Player(const InitialiseurDeSprite& initsprite);
 	void kill() { isAlive_ = false; }
-	bool isAlive() { return isAlive_; }
-	void setContour(sf::RectangleShape shape) { contour_ = shape.getGlobalBounds(); }
-	void setContour(sf::Sprite sprite) { contour_ = sprite.getGlobalBounds(); }
-	void setContour(AnimatedSprite& animatedSprite) { contour_ = animatedSprite.getGlobalBounds(); }
-	void draw(sf::RenderWindow& window, sf::RectangleShape shape) { shape.setPosition(0,positionY_); window.draw(shape); }
-	void draw(sf::RenderWindow& window, sf::Sprite sprite) {sprite.setPosition(0, positionY_); window.draw(sprite); }
-	void draw(sf::RenderWindow& window, AnimatedSprite& animatedSprite, const sf::Time& elapsedTime) { animatedSprite.setPosition({ 0,positionY_ }); animatedSprite.Animer(elapsedTime); animatedSprite.draw(window); }
+	bool isAlive() const { return isAlive_; }
+	void drawRectangle(sf::RenderWindow& window) { shape_.setPosition(position_); window.draw(shape_); }
+	void drawImage(sf::RenderWindow& window) {sprite_.setPosition(position_); window.draw(sprite_); }
+	void drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime) { animatedSprite_->setPosition(position_); animatedSprite_->Animer(elapsedTime); animatedSprite_->draw(window); }
 	bool isCollision(const Obstacle& obstacle);
 	void jump();
+	void moveLeft(const float& x) { position_.x -= x; }
+	void moveRight(const float& x){ position_.x += x; }
+	~Player() { delete animatedSprite_; }
 };
 
 class Obstacle
@@ -35,14 +35,14 @@ class Obstacle
 public :
 	sf::Vector2f position_;
 	sf::FloatRect contour_;
+	sf::RectangleShape shape_;
+	sf::Sprite sprite_;
+	AnimatedSprite* animatedSprite_;
 private : 
 	Obstacle(float x, float y) { position_ = { x,y }; }
-	void setContour(sf::RectangleShape shape) { contour_ = shape.getGlobalBounds(); }
-	void setContour(sf::Sprite sprite) { contour_ = sprite.getGlobalBounds(); }
-	void setContour(AnimatedSprite& animatedSprite) { contour_ = animatedSprite.getGlobalBounds(); }
-	void draw(sf::RenderWindow& window, sf::RectangleShape shape) { shape.setPosition(position_); window.draw(shape); }
-	void draw(sf::RenderWindow& window, sf::Sprite sprite) { sprite.setPosition(position_); window.draw(sprite); }
-	void draw(sf::RenderWindow& window, AnimatedSprite& animatedSprite, const sf::Time& elapsedTime) { animatedSprite.setPosition(position_); animatedSprite.Animer(elapsedTime); animatedSprite.draw(window); }
+	void drawRectangle(sf::RenderWindow& window) { shape_.setPosition(position_); window.draw(shape_); }
+	void drawImage(sf::RenderWindow& window) { sprite_.setPosition(position_); window.draw(sprite_); }
+	void drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime) { animatedSprite_->setPosition(position_); animatedSprite_->Animer(elapsedTime); animatedSprite_->draw(window); }
 	void move(float x, float y) { position_.x += x; position_.y += y; }
 	const sf::FloatRect& getContour() const { return contour_; }
 };

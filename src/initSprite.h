@@ -1,7 +1,8 @@
 #ifndef INIT_H
 #define INIT_H
-#include"entite.h"
+#include <SFML/Graphics.hpp>
 
+//class stockant les textures en mémoire
 class InitialiseurDeSprite
 {
 private:
