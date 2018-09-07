@@ -8,10 +8,10 @@
 
 int main()
 {
-	////init le son
-	//sf::Music music;
-	//DJ dj(music);
-	//dj.playMusicForever("../../music/game.ogg");
+	//init le son
+	sf::Music music;
+	DJ dj(music);
+	dj.playMusicForever("../../music/game.ogg");
 
 	//init les skins
 	InitialiseurDeSprite initSprite;

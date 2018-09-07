@@ -40,7 +40,7 @@ public :
 	void drawRectangle(sf::RenderWindow& window) { shape_.setPosition(position_); window.draw(shape_); }
 	void drawImage(sf::RenderWindow& window) {sprite_.setPosition(position_); window.draw(sprite_); }
 	void drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime) { animatedSprite_->setPosition(position_); animatedSprite_->Animer(elapsedTime); animatedSprite_->draw(window); }
-	//bool isCollision(Obstacle& obstacle);
+	bool isCollision(const Obstacle& obstacle);
 	void jump();
 	void moveLeft(const float& x) { position_.x -= x; }
 	void moveRight(const float& x){ position_.x += x; }
