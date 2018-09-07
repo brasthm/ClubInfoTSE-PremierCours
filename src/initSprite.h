@@ -11,7 +11,7 @@ private:
 	std::vector<sf::Texture> TextureAttaquePlayer_;
 	std::vector<sf::Sprite> SpriteAttaquePlayer_;
 
-	//Methode priver
+	//Methode privée
 	void initialiserSpritePlayer();
 	void initialiserSpriteAttaquePlayer();
 public:
