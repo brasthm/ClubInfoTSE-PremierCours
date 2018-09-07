@@ -22,12 +22,12 @@ void Player::jump()
 
 }
 
-bool Player::isCollision(const Obstacle& obstacle) 
-{
-	//MAJ position sur shape (mm taille que les images)
-	shape_.setPosition(position_);
-	return shape_.getGlobalBounds().intersects(obstacle.getGlobalBounds());
-}
+//bool Player::isCollision(Obstacle& obstacle) 
+//{
+//	//MAJ position sur shape (mm taille que les images)
+//	shape_.setPosition(position_);
+//	return shape_.getGlobalBounds().intersects(obstacle.getGlobalBounds());
+//}
 
 
 

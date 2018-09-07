@@ -1,12 +1,11 @@
 #include"initSprite.h"
 #include"Utils.h"
+#include "constantes.h"
 
 InitialiseurDeSprite::InitialiseurDeSprite() 
 {
 	TexturePlayer_.reserve(NOMBRE_IMAGE_PLAYER);
-	TextureAttaquePlayer_.reserve(5);
 	initialiserSpritePlayer();
-	initialiserSpriteAttaquePlayer();
 }
 
 //initialise le sprite du joueur
@@ -23,10 +22,4 @@ void InitialiseurDeSprite::initialiserSpritePlayer()
 		sprite.setTexture(TexturePlayer_[i-1]);
 		SpritePlayer_.push_back(sprite);
 	}
-}
-
-//initialise les sprites de l'attaque du joueur
-void InitialiseurDeSprite::initialiserSpriteAttaquePlayer()
-{
-
 }
