@@ -4,17 +4,20 @@
 #include"entite.h"
 #include "constantes.h"
 #include "background.h"
+#include "DJ.hpp"
 
 int main()
 {
+	//init le son
+	sf::Music music;
+	DJ dj(music);
+	dj.playMusicForever("../../music/game.ogg");
+
+	//init les skins
 	InitialiseurDeSprite initSprite;
-	
-	//initialisation du joueur
-	std::vector<sf::Sprite> spritesPlayer = initSprite.getSpritePlayer();
-	AnimatedSprite* spriteAnimerPlayer = new AnimatedSprite(spritesPlayer, sf::milliseconds(100));
-	std::vector<sf::Sprite> spritesAttaque = initSprite.getSpriteAttaquePlayer();
-	IComportementAttaque* cmptAttPlayer = new AttaqueCaster(sf::seconds(0.5),spritesAttaque,sf::milliseconds(333));
-	Player player(spriteAnimerPlayer,100,10,cmptAttPlayer);
+
+	//création du joueur
+	Player player(initSprite);
 
 	//initialisation du fond
 	Background backgound;
@@ -35,7 +38,6 @@ int main()
 	//Création de la clock
 	sf::Clock clock;
 
-	window.setKeyRepeatEnabled(true);
 	//Tant que l'on joue (fenetre ouverte)
 	while (window.isOpen())
 	{
@@ -47,7 +49,7 @@ int main()
 
 		//Boucle des évennements
 		while (window.pollEvent(event))
-		{	
+		{
 			//Evenement de fermeture de la fenetre : on ferme le jeux
 			if (event.type == sf::Event::Closed)
 				window.close();
@@ -60,29 +62,14 @@ int main()
 					player.jump();
 			}
 
-			//POUR DEBUG 
-			if (event.type == sf::Event::MouseButtonPressed)
-				if (event.mouseButton.button == sf::Mouse::Right)
-				{
-					std::cout << "position : " << player.getPosition().x << ", " << player.getPosition().y << std::endl;
-				}
-
 		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			player.moveRight(elapsedTime);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			player.moveLeft(elapsedTime);
-
-		player.gestionPositionY(elapsedTime, sol.getGlobalBounds());
 
 		//----Zone d'affichage----//
 		//Efface la fenetre
 		window.clear();
 
 		backgound.draw(window, elapsedTime);
-		player.draw(window, elapsedTime);
+		player.drawRectangle(window);
 		window.draw(sol);
 
 		//Affiche la fenetre
