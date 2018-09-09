@@ -10,6 +10,8 @@
 class Player
 {
 	protected :
+		int hSpeed_ = 500;
+		float vSpeed_ = 0;
 		bool isAlive_ = true;
 		sf::Vector2f position_;
 		sf::FloatRect contour_;
@@ -28,6 +30,7 @@ class Player
 		void jump();
 		void moveLeft(const float& x) { position_.x -= x; }
 		void moveRight(const float& x){ position_.x += x; }
+		void gestion(sf::RenderWindow &window, const sf::Time& elapsedTime);
 		~Player() { delete animatedSprite_; }
 };
 

@@ -11,7 +11,7 @@ int main()
 	//init le son
 	sf::Music music;
 	DJ dj(music);
-	dj.playMusicForever("../../music/game.ogg");
+	//dj.playMusicForever("../../music/game.ogg");
 
 	//init les skins
 	InitialiseurDeSprite initSprite;
@@ -29,7 +29,7 @@ int main()
 
 	sf::RectangleShape sol;
 	sol.setSize({ 800,100 });
-	sol.setPosition(0, 500);
+	sol.setPosition(0, FLOOR);
 	sol.setFillColor(sf::Color::White);
 
 	//Création de la fenetre du jeux
@@ -69,7 +69,7 @@ int main()
 		window.clear();
 
 		backgound.draw(window, elapsedTime);
-		player.drawRectangle(window);
+		player.gestion(window, elapsedTime);
 		window.draw(sol);
 
 		//Affiche la fenetre
