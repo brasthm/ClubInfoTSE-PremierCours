@@ -30,5 +30,24 @@ bool Player::isCollision(const Obstacle& obstacle)
 }
 
 
+void Player::drawRectangle(sf::RenderWindow& window) 
+{ 
+	shape_.setPosition(position_); 
+	window.draw(shape_); 
+}
+
+void Player::drawImage(sf::RenderWindow& window) 
+{ 
+	sprite_.setPosition(position_); 
+	window.draw(sprite_); 
+}
+
+void Player::drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime)
+{ 
+	animatedSprite_->setPosition(position_);
+	animatedSprite_->animer(elapsedTime);
+	animatedSprite_->draw(window);
+}
+
 
 
