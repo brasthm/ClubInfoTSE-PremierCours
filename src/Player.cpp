@@ -1,4 +1,4 @@
-#include"entite.h"
+#include"Player.h"
 
 Player::Player(const InitialiseurDeSprite& initsprite)
 {

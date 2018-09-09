@@ -1,5 +1,4 @@
-#include"initSprite.h"
-#include"Utils.h"
+#include "InitSprite.h"
 #include "constantes.h"
 
 InitialiseurDeSprite::InitialiseurDeSprite() 

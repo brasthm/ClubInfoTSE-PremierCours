@@ -1,8 +1,8 @@
 #ifndef DJ_HPP
 #define DJ_HPP
 #include <SFML/Audio.hpp>
-#include<vector>
-#include<string>
+#include <vector>
+#include <string>
 
 class Track {
 	private : 

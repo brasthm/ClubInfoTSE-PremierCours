@@ -1,7 +1,7 @@
 #ifndef ENTITE_H
 #define ENTITE_H
 
-#include "initSprite.h"
+#include "InitSprite.h"
 #include "AnimatedSprite.h"
 #include "constantes.h"
 #include "Obstacle.h"

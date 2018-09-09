@@ -2,7 +2,7 @@
 #define OBSTACLE_H
 
 #include "SFML\Graphics.hpp"
-#include "../../src/AnimatedSprite.h"
+#include "AnimatedSprite.h"
 
 
 class Obstacle
@@ -17,7 +17,7 @@ class Obstacle
 		Obstacle(float x, float y) { position_ = { x,y }; }
 		void drawRectangle(sf::RenderWindow& window) { shape_.setPosition(position_); window.draw(shape_); }
 		void drawImage(sf::RenderWindow& window) { sprite_.setPosition(position_); window.draw(sprite_); }
-		void drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime) { animatedSprite_->setPosition(position_); animatedSprite_->Animer(elapsedTime); animatedSprite_->draw(window); }
+		void drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime) { animatedSprite_->setPosition(position_); animatedSprite_->animer(elapsedTime); animatedSprite_->draw(window); }
 		void move(float x, float y) { position_.x += x; position_.y += y; }
 		const sf::FloatRect& getGlobalBounds() const { return contour_; }
 };

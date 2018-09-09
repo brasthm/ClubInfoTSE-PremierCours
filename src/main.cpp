@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include"initSprite.h"
-#include"entite.h"
+#include "InitSprite.h"
+#include "player.h"
 #include "constantes.h"
-#include "background.h"
+#include "Background.h"
 #include "DJ.hpp"
 
 int main()
