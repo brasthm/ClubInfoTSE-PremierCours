@@ -1,12 +1,14 @@
 add_executable(${PROJECT_NAME} 
+        AnimatedSprite.h
+        AnimatedSprite.cpp
+        background.h
+        background.cpp
         constantes.h
         entite.h
         entite.cpp
         initSprite.h
         initSprite.cpp
         main.cpp
-        spriteAnimer.h
-        spriteAnimer.cpp
         Utils.h
         Utils.cpp
     )
