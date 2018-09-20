@@ -11,7 +11,7 @@ void Track::setTrack(std::string filepath, std::string name)
 
 DJ::DJ(sf::Music& m) : music_(m)
 {
-	AllTrack_.resize(20);
+	allTrack_.resize(20);
 	//Add here
 }
 
@@ -27,7 +27,7 @@ void DJ::playMusicForever(std::string path)
 void DJ::play(size_t n, bool forced)
 {
 	if (forced)
-		AllTrack_[n].getSound().play();
+		allTrack_[n].getSound().play();
 	else
-		if (AllTrack_[n].getSound().getStatus() != sf::Sound::Playing) AllTrack_[n].getSound().play();
+		if (allTrack_[n].getSound().getStatus() != sf::Sound::Playing) allTrack_[n].getSound().play();
 }

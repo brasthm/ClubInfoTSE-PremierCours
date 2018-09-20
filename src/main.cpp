@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include"initSprite.h"
-#include"entite.h"
+#include "InitSprite.h"
+#include "player.h"
 #include "constantes.h"
-#include "background.h"
+#include "Background.h"
 #include "DJ.hpp"
 
 int main()
@@ -11,7 +11,7 @@ int main()
 	//init le son
 	sf::Music music;
 	DJ dj(music);
-	dj.playMusicForever("../../music/game.ogg");
+	//dj.playMusicForever("../../music/game.ogg");
 
 	//init les skins
 	InitialiseurDeSprite initSprite;
@@ -29,8 +29,8 @@ int main()
 
 	sf::RectangleShape sol;
 	sol.setSize({ 800,100 });
-	sol.setPosition(0, 500);
-	sol.setFillColor(sf::Color::Color(153,76,0));
+	sol.setPosition(0, FLOOR);
+	sol.setFillColor(sf::Color::Color(153, 76, 0));
 
 	//Création de la fenetre du jeux
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
@@ -69,7 +69,7 @@ int main()
 		window.clear();
 
 		backgound.draw(window, elapsedTime);
-		player.drawRectangle(window);
+		player.gestion(window, elapsedTime);
 		window.draw(sol);
 
 		//Affiche la fenetre

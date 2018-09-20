@@ -1,10 +1,9 @@
-#include"initSprite.h"
-#include"Utils.h"
+#include "InitSprite.h"
 #include "constantes.h"
 
 InitialiseurDeSprite::InitialiseurDeSprite() 
 {
-	TexturePlayer_.reserve(NOMBRE_IMAGE_PLAYER);
+	texturePlayer_.reserve(NOMBRE_IMAGE_PLAYER);
 	initialiserSpritePlayer();
 }
 
@@ -14,12 +13,12 @@ void InitialiseurDeSprite::initialiserSpritePlayer()
 	for (unsigned int i = 1; i < NOMBRE_IMAGE_PLAYER+1; i++)
 	{
 		std::string chemin = RUNNING_PLAYER_PATH + "player_run";
-		chemin.append(intToString(i)+".png");
+		chemin.append(std::to_string(i)+".png");
 		sf::Texture texture;
 		texture.loadFromFile(chemin);
-		TexturePlayer_.push_back(texture);
+		texturePlayer_.push_back(texture);
 		sf::Sprite sprite;
-		sprite.setTexture(TexturePlayer_[i-1]);
-		SpritePlayer_.push_back(sprite);
+		sprite.setTexture(texturePlayer_[i-1]);
+		spritePlayer_.push_back(sprite);
 	}
 }

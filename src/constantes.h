@@ -15,7 +15,8 @@ static constexpr size_t NOMBRE_IMAGE_PLAYER = 8;
 static constexpr size_t BG_TEXTURE_MAX = 10;
 
 //Gravité
-static constexpr float GRAVITY = 5000;
+static constexpr float GRAVITY = 20;
+static constexpr float FLOOR = 500;
 
 //Chemin vers les images du player run
 static const std::string RUNNING_PLAYER_PATH = "../../img/player/run/";
