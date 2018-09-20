@@ -33,7 +33,7 @@ int main()
 	sol.setFillColor(sf::Color(153, 76, 0));
 
 	//Création de la fenetre du jeux
-	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
+	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER", sf::Style::Default, sf::ContextSettings(0, 0, 8));
 	
 	//Création de la clock
 	sf::Clock clock;
@@ -53,14 +53,6 @@ int main()
 			//Evenement de fermeture de la fenetre : on ferme le jeux
 			if (event.type == sf::Event::Closed)
 				window.close();
-
-			//Evenement clavier
-			if (event.type == sf::Event::KeyPressed)
-			{
-				//Evenement de saut
-				if (event.key.code == sf::Keyboard::Space)
-					player.jump();
-			}
 
 		}
 		player.gestion(window, elapsedTime);

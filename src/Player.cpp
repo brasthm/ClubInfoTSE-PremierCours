@@ -12,7 +12,7 @@ Player::Player(const InitialiseurDeSprite& initsprite)
 	//ini de l'image du joueur
 	sprite_ = sprites[1];
 
-	//ini de l'image animé du joueur
+	//ini de l'image animï¿½ du joueur
 	animatedSprite_ = new AnimatedSprite(sprites, sf::milliseconds(100));
 }
 
@@ -32,6 +32,9 @@ void Player::gestion(sf::RenderWindow & window, const sf::Time& elapsedTime)
 		moveLeft(hSpeed_*elapsedTime.asSeconds());
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)&&position_.x<WINDOW_SIZE_X- shape_.getGlobalBounds().width)
 		moveRight(hSpeed_*elapsedTime.asSeconds());
+	//Evenement de saut
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		jump();
 
 	vSpeed_ += GRAVITY * elapsedTime.asSeconds();
 
