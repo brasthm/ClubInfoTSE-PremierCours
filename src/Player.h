@@ -13,8 +13,8 @@ class Player
 		int hSpeed_ = 500;
 		float vSpeed_ = 0;
 		bool isAlive_ = true;
+		bool isjumping_ = false;
 		sf::Vector2f position_;
-		sf::FloatRect contour_;
 		sf::RectangleShape shape_;
 		sf::Sprite sprite_;
 		AnimatedSprite* animatedSprite_;

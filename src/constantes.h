@@ -16,6 +16,8 @@ static constexpr size_t BG_TEXTURE_MAX = 10;
 
 //Gravité
 static constexpr float GRAVITY = 20;
+
+//Position du sol
 static constexpr float FLOOR = 500;
 
 //Chemin vers les images du player run

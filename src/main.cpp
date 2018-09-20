@@ -63,13 +63,15 @@ int main()
 			}
 
 		}
+		player.gestion(window, elapsedTime);
 
 		//----Zone d'affichage----//
 		//Efface la fenetre
 		window.clear();
 
+		//Dessin des images
 		backgound.draw(window, elapsedTime);
-		player.gestion(window, elapsedTime);
+		player.drawImageAnime(window, elapsedTime);
 		window.draw(sol);
 
 		//Affiche la fenetre
