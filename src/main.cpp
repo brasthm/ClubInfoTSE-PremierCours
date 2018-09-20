@@ -30,7 +30,7 @@ int main()
 	sf::RectangleShape sol;
 	sol.setSize({ 800,100 });
 	sol.setPosition(0, 500);
-	sol.setFillColor(sf::Color::White);
+	sol.setFillColor(sf::Color::Color(153,76,0));
 
 	//Création de la fenetre du jeux
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
