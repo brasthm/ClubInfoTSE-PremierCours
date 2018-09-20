@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "InitSprite.h"
-#include "player.h"
+#include "initSprite.h"
+#include "Player.h"
 #include "constantes.h"
-#include "Background.h"
-#include "DJ.hpp"
+#include "background.h"
+#include "DJ.h"
 
 int main()
 {
@@ -30,7 +30,7 @@ int main()
 	sf::RectangleShape sol;
 	sol.setSize({ 800,100 });
 	sol.setPosition(0, FLOOR);
-	sol.setFillColor(sf::Color::Color(153, 76, 0));
+	sol.setFillColor(sf::Color(153, 76, 0));
 
 	//Création de la fenetre du jeux
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
