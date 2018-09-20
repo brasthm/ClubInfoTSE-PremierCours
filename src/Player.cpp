@@ -1,4 +1,5 @@
 #include"Player.h"
+#include<iostream>
 
 Player::Player(const InitialiseurDeSprite& initsprite)
 {
@@ -44,11 +45,10 @@ void Player::gestion(sf::RenderWindow & window, const sf::Time& elapsedTime)
 		
 }
 
-bool Player::isCollision(const Obstacle& obstacle) 
+bool Player::isCollision(sf::RenderWindow& window, const Obstacle& obstacle)
 {
-	//MAJ position sur shape (mm taille que les images)
-	shape_.setPosition(position_);
-	return shape_.getGlobalBounds().intersects(obstacle.getGlobalBounds());
+	if (!obstacle.isDeadly()) return false;
+	return animatedSprite_->getGlobalBounds().intersects(obstacle.getGlobalBounds());
 }
 
 

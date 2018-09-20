@@ -3,23 +3,27 @@
 
 #include "SFML\Graphics.hpp"
 #include "AnimatedSprite.h"
-
+#include "initSprite.h"
 
 class Obstacle
 {
 	private:
 		sf::Vector2f position_;
-		sf::FloatRect contour_;
-		sf::RectangleShape shape_;
+		sf::RectangleShape shape_, barre1_, barre2_;
 		sf::Sprite sprite_;
-		AnimatedSprite* animatedSprite_;
+		sf::Time time_ = sf::milliseconds(500);
+		sf::Time timeProgression_;
+		bool dead_ = false;
+		bool deadly_ = false;
+		bool isHorizontal_ = false;
+
 	public:
-		Obstacle(float x, float y) { position_ = { x,y }; }
-		void drawRectangle(sf::RenderWindow& window) { shape_.setPosition(position_); window.draw(shape_); }
-		void drawImage(sf::RenderWindow& window) { sprite_.setPosition(position_); window.draw(sprite_); }
-		void drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime) { animatedSprite_->setPosition(position_); animatedSprite_->animer(elapsedTime); animatedSprite_->draw(window); }
-		void move(float x, float y) { position_.x += x; position_.y += y; }
-		const sf::FloatRect& getGlobalBounds() const { return contour_; }
+		Obstacle(const InitialiseurDeSprite& inisprite, const sf::Vector2f& position);
+		void drawImage(sf::RenderWindow& window);
+		sf::FloatRect getGlobalBounds() const { return sprite_.getGlobalBounds(); }
+		void draw(sf::RenderWindow& window, const sf::Time& elapsedTime);
+		bool isDead() { return dead_; }
+		bool isDeadly() const { return deadly_; }
 };
 
 

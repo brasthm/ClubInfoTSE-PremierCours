@@ -6,7 +6,6 @@
 #include "constantes.h"
 #include "Obstacle.h"
 
-//Cyril fait le jump
 class Player
 {
 	protected :
@@ -26,11 +25,12 @@ class Player
 		void drawRectangle(sf::RenderWindow& window);
 		void drawImage(sf::RenderWindow& window);
 		void drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime);
-		bool isCollision(const Obstacle& obstacle);
+		bool isCollision(sf::RenderWindow& window,const Obstacle& obstacle);
 		void jump();
 		void moveLeft(const float& x) { position_.x -= x; }
 		void moveRight(const float& x){ position_.x += x; }
 		void gestion(sf::RenderWindow &window, const sf::Time& elapsedTime);
+		void ressurect() { isjumping_ = false; isAlive_ = true; }
 		~Player() { delete animatedSprite_; }
 };
 
