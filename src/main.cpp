@@ -1,20 +1,23 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include"initSprite.h"
-#include"entite.h"
+#include "InitSprite.h"
+#include "player.h"
 #include "constantes.h"
-#include "background.h"
+#include "Background.h"
+#include "DJ.hpp"
 
 int main()
 {
+	//init le son
+	sf::Music music;
+	DJ dj(music);
+	//dj.playMusicForever("../../music/game.ogg");
+
+	//init les skins
 	InitialiseurDeSprite initSprite;
-	
-	//initialisation du joueur
-	std::vector<sf::Sprite> spritesPlayer = initSprite.getSpritePlayer();
-	AnimatedSprite* spriteAnimerPlayer = new AnimatedSprite(spritesPlayer, sf::milliseconds(100));
-	std::vector<sf::Sprite> spritesAttaque = initSprite.getSpriteAttaquePlayer();
-	IComportementAttaque* cmptAttPlayer = new AttaqueCaster(sf::seconds(0.5),spritesAttaque,sf::milliseconds(333));
-	Player player(spriteAnimerPlayer,100,10,cmptAttPlayer);
+
+	//création du joueur
+	Player player(initSprite);
 
 	//initialisation du fond
 	Background backgound;
@@ -26,8 +29,8 @@ int main()
 
 	sf::RectangleShape sol;
 	sol.setSize({ 800,100 });
-	sol.setPosition(0, 500);
-	sol.setFillColor(sf::Color::White);
+	sol.setPosition(0, FLOOR);
+	sol.setFillColor(sf::Color::Color(153, 76, 0));
 
 	//Création de la fenetre du jeux
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
@@ -35,7 +38,6 @@ int main()
 	//Création de la clock
 	sf::Clock clock;
 
-	window.setKeyRepeatEnabled(true);
 	//Tant que l'on joue (fenetre ouverte)
 	while (window.isOpen())
 	{
@@ -47,7 +49,7 @@ int main()
 
 		//Boucle des évennements
 		while (window.pollEvent(event))
-		{	
+		{
 			//Evenement de fermeture de la fenetre : on ferme le jeux
 			if (event.type == sf::Event::Closed)
 				window.close();
@@ -60,29 +62,16 @@ int main()
 					player.jump();
 			}
 
-			//POUR DEBUG 
-			if (event.type == sf::Event::MouseButtonPressed)
-				if (event.mouseButton.button == sf::Mouse::Right)
-				{
-					std::cout << "position : " << player.getPosition().x << ", " << player.getPosition().y << std::endl;
-				}
-
 		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			player.moveRight(elapsedTime);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			player.moveLeft(elapsedTime);
-
-		player.gestionPositionY(elapsedTime, sol.getGlobalBounds());
+		player.gestion(window, elapsedTime);
 
 		//----Zone d'affichage----//
 		//Efface la fenetre
 		window.clear();
 
+		//Dessin des images
 		backgound.draw(window, elapsedTime);
-		player.draw(window, elapsedTime);
+		player.drawImageAnime(window, elapsedTime);
 		window.draw(sol);
 
 		//Affiche la fenetre
