@@ -30,7 +30,7 @@ void Player::jump()
 	{ 
 		vSpeed_ = -10;
 		isjumping_ = true;
-		hitbox_.height = 150;
+		hitbox_.height = 140;
 	}
 }
 
