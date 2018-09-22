@@ -80,13 +80,12 @@ int main()
 
 		// Gestion du joueur
 		player.gestion(window, elapsedTime);
-		dj.play(0);
 
 		// Gestion des obstacles
 		spawnProgression += elapsedTime;
 		if (spawnProgression > spawnRate)
 		{
-			dj.play(1);
+			dj.play(0);
 			obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % 2]));
 
 			for (int i = 0; i < rand() % 2; i++)

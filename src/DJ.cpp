@@ -16,10 +16,10 @@ void Track::setTrack(std::string filepath, std::string name)
 
 DJ::DJ(sf::Music& m) : music_(m)
 {
+	allTrack_.resize(1);
+
 	// Chargement des sons
-	allTrack_.emplace_back("../../sounds/pas-course.wav");
-	allTrack_.at(0).getSound().setVolume(100);
-	allTrack_.emplace_back("../../sounds/obstacle-sound.wav");
+	allTrack_.at(0) = *(new Track("../../sounds/obstacle-sound.wav"));
 
     for (auto &t : allTrack_)
     {
