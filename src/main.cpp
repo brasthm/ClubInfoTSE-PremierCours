@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "initSprite.h"
 #include "Player.h"
 #include "constantes.h"
@@ -38,7 +37,7 @@ int main()
 	std::vector<Obstacle> obstacles;
 	sf::Time spawnRate = sf::milliseconds(2000);
 	sf::Time spawnProgression = sf::Time::Zero;
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 
 	//Ecran de fin de game
 	sf::Texture tscreen;
@@ -81,10 +80,12 @@ int main()
 		}
 
 		player.gestion(window, elapsedTime);
+		dj.play(0);
 
 		spawnProgression += elapsedTime;
 		if (spawnProgression > spawnRate)
 		{
+			dj.play(1);
 			obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % 2]));
 
 			for (int i = 0; i < rand() % 2; i++)

@@ -1,6 +1,11 @@
 #include "DJ.h"
 
-Track::Track(){}
+Track::Track(std::string filepath, std::string name)
+{
+	buffer_.loadFromFile(filepath);
+	sound_.setBuffer(buffer_);
+	name_ = name;
+}
 
 void Track::setTrack(std::string filepath, std::string name)
 {
@@ -11,8 +16,10 @@ void Track::setTrack(std::string filepath, std::string name)
 
 DJ::DJ(sf::Music& m) : music_(m)
 {
-	allTrack_.resize(20);
-	//Add here
+	// Chargement des sons
+	allTrack_.emplace_back("../../sounds/pas-course.wav");
+	allTrack_.at(0).getSound().setVolume(100);
+	allTrack_.emplace_back("../../sounds/obstacle-sound.wav");
 }
 
 void DJ::playMusicForever(std::string path)
