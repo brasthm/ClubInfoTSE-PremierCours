@@ -7,8 +7,6 @@
 #include "DJ.h"
 #include <ctime>
 
-void afficherFin(sf::RenderWindow &window, sf::Texture &endScreen);
-
 int main()
 {
 	//init le son
@@ -23,12 +21,12 @@ int main()
 	Player player(initSprite);
 
 	//initialisation du fond
-	Background backgound;
-	backgound.init(BACKGROUND_PATH + "grassland/bg-grass", 4);
-	backgound.setSpeed(0, 0);
-	backgound.setSpeed(1, -10);
-	backgound.setSpeed(2, -40);
-	backgound.setSpeed(3, -20);
+	Background background;
+	background.init(BACKGROUND_PATH + "grassland/bg-grass", 4);
+	background.setSpeed(0, 0);
+	background.setSpeed(1, -10);
+	background.setSpeed(2, -40);
+	background.setSpeed(3, -20);
 
 	sf::RectangleShape sol;
 	sol.setSize({ 800,100 });
@@ -81,12 +79,26 @@ int main()
 			spawnProgression = sf::Time::Zero;
 		}
 
+		
+
+		//----Zone d'affichage----//
+		//Efface la fenetre
+		window.clear();
+
+		//Dessin des images
+		background.draw(window, elapsedTime);
+		player.drawImageAnime(window, elapsedTime);
+		window.draw(sol);
+
+		for (size_t i = 0; i < obstacles.size(); i++)
+			obstacles[i].draw(window, elapsedTime);
+
 		for (size_t i = 0; i < obstacles.size(); i++)
 		{
 			if (player.isCollision(window, obstacles[i]))
 			{
 				std::cout << "kill" << std::endl;
-				player.kill();		
+				player.kill();
 			}
 			if (obstacles[i].isDead())
 			{
@@ -94,18 +106,6 @@ int main()
 				obstacles.pop_back();
 			}
 		}
-
-		//----Zone d'affichage----//
-		//Efface la fenetre
-		window.clear();
-
-		//Dessin des images
-		backgound.draw(window, elapsedTime);
-		player.drawImageAnime(window, elapsedTime);
-		window.draw(sol);
-
-		for (size_t i = 0; i < obstacles.size(); i++)
-			obstacles[i].draw(window, elapsedTime);
 
 		window.display();
 
@@ -120,41 +120,4 @@ int main()
 		sf::sleep(sf::milliseconds(10));
 	}
 	return 0;
-}
-
-void afficherFin(sf::RenderWindow &window, sf::Texture &endScreen)
-{
-	bool continuer = true;
-	sf::Sprite sprite;
-	sprite.setTexture(endScreen);
-
-	while (continuer && window.isOpen())
-	{
-		//Création d'un objet récupérant les événements (touche clavier et autre)
-		sf::Event event {};
-
-		//Boucle des évennements
-		while (window.pollEvent(event))
-		{
-			//Evenement de fermeture de la fenetre : on ferme le jeux
-			if (event.type == sf::Event::Closed)
-				window.close();
-
-			//Evenement clavier
-			if (event.type == sf::Event::KeyPressed)
-			{
-				//Evenement de saut
-				if (event.key.code == sf::Keyboard::Return)
-					continuer = false;
-			}
-		}
-
-		//----Zone d'affichage----//
-		//Efface la fenetre
-		window.clear();
-		window.draw(sprite);
-		window.display();
-
-		sf::sleep(sf::milliseconds(10));
-	}
 }
