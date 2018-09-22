@@ -10,7 +10,8 @@ class Track {
 		sf::Sound sound_;
 		std::string name_;
 	public :
-		Track();
+		Track() = default;
+		Track(std::string filepath, std::string name = "");
 		void setTrack(std::string filepath, std::string name);
 		const std::string& getName() const{ return name_; }
 		sf::Sound& getSound() { return sound_; }
