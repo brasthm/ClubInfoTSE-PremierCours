@@ -40,3 +40,40 @@ void Background::draw(sf::RenderWindow & screen, sf::Time &elapsed)
 		screen.draw(layers2_[i]);
 	}
 }
+
+void afficherFin(sf::RenderWindow &window, sf::Texture &endScreen)
+{
+	bool continuer = true;
+	sf::Sprite sprite;
+	sprite.setTexture(endScreen);
+
+	while (continuer && window.isOpen())
+	{
+		//Création d'un objet récupérant les événements (touche clavier et autre)
+		sf::Event event {};
+
+		//Boucle des évennements
+		while (window.pollEvent(event))
+		{
+			//Evenement de fermeture de la fenetre : on ferme le jeux
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+			//Evenement clavier
+			if (event.type == sf::Event::KeyPressed)
+			{
+				//Evenement de saut
+				if (event.key.code == sf::Keyboard::Return)
+					continuer = false;
+			}
+		}
+
+		//----Zone d'affichage----//
+		//Efface la fenetre
+		window.clear();
+		window.draw(sprite);
+		window.display();
+
+		sf::sleep(sf::milliseconds(10));
+	}
+}

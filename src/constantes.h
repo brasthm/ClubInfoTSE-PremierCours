@@ -21,7 +21,9 @@ static constexpr float GRAVITY = 20;
 static constexpr float FLOOR = 500;
 
 //Chemin vers les images du player run
-static const std::string RUNNING_PLAYER_PATH = "../../img/player/run/";
+static const std::string PLAYER_PATH = "../../img/player/";
 static const std::string BACKGROUND_PATH = "../../img/bg/";
+static const std::string LAZER_PATH = "../../img/lazer/";
+static const std::string FONT_MONSERRAT = "../../font/montserrat.ttf";
 
 #endif // !CONSTANTES_H

@@ -8,10 +8,16 @@ Player::Player(const InitialiseurDeSprite& initsprite)
 	shape_.setPosition(0, 160);
 	shape_.setFillColor(sf::Color::Blue);
 
+	hitbox_.width = 50;
+	hitbox_.height = 200;
+
 	std::vector<sf::Sprite> sprites = initsprite.getSpritePlayer();
 
 	//ini de l'image du joueur
-	sprite_ = sprites[1];
+	sprite_ = sprites[0];
+
+	spriteJump_ = sprites.back();
+	sprites.pop_back();
 
 	//ini de l'image anim� du joueur
 	animatedSprite_ = new AnimatedSprite(sprites, sf::milliseconds(100));
@@ -24,6 +30,7 @@ void Player::jump()
 	{ 
 		vSpeed_ = -10;
 		isjumping_ = true;
+		hitbox_.height = 150;
 	}
 }
 
@@ -39,18 +46,28 @@ void Player::gestion(sf::RenderWindow& window, const sf::Time& elapsedTime)
 
     vSpeed_ += GRAVITY * elapsedTime.asSeconds();
 
-    position_.y += vSpeed_;
-    if(position_.y > FLOOR - shape_.getGlobalBounds().height)
-    {
-        position_.y = FLOOR - shape_.getGlobalBounds().height;
-        isjumping_ = false;
-    }
+	position_.y += vSpeed_;
+	if (position_.y > FLOOR - shape_.getGlobalBounds().height)
+	{
+		position_.y = FLOOR - shape_.getGlobalBounds().height;
+		isjumping_ = false;
+		hitbox_.height = 200;
+	}
+		
+}
+
+void Player::ressurect()
+{
+	isAlive_ = true;
 }
 
 bool Player::isCollision(sf::RenderWindow& window, const Obstacle& obstacle)
 {
+	hitbox_.left = position_.x + 100;
+	hitbox_.top = position_.y + 50;
+
 	if (!obstacle.isDeadly()) return false;
-	return animatedSprite_->getGlobalBounds().intersects(obstacle.getGlobalBounds());
+	return hitbox_.intersects(obstacle.getGlobalBounds());
 }
 
 
@@ -69,8 +86,16 @@ void Player::drawImage(sf::RenderWindow& window)
 void Player::drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime)
 { 
 	animatedSprite_->setPosition(position_);
-	animatedSprite_->animer(elapsedTime);
-	animatedSprite_->draw(window);
+	spriteJump_.setPosition(position_);
+
+	if (!isjumping_)
+	{
+		animatedSprite_->animer(elapsedTime);
+		animatedSprite_->draw(window);
+	}
+	else
+		window.draw(spriteJump_);
+	
 }
 
 

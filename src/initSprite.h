@@ -12,7 +12,7 @@ private:
 	std::vector<sf::Texture> textureObstacle_;
 	std::vector<sf::Sprite> spriteObstacle_;
 
-	//Methode priver
+	//Methodes privées
 	void initialiserSpritePlayer();
 	void initialiserSpriteObstacle();
 public:

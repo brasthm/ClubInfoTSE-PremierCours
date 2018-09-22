@@ -15,8 +15,9 @@ class Player
 		bool isjumping_ = false;
 		sf::Vector2f position_;
 		sf::RectangleShape shape_;
-		sf::Sprite sprite_;
+		sf::Sprite sprite_, spriteJump_;
 		AnimatedSprite* animatedSprite_;
+		sf::FloatRect hitbox_;
 
 	public :
 		Player(const InitialiseurDeSprite& initsprite);
@@ -30,7 +31,7 @@ class Player
 		void moveLeft(const float& x) { position_.x -= x; }
 		void moveRight(const float& x){ position_.x += x; }
 		void gestion(sf::RenderWindow &window, const sf::Time& elapsedTime);
-		void ressurect() { isjumping_ = false; isAlive_ = true; }
+		void ressurect();
 		~Player() { delete animatedSprite_; }
 };
 

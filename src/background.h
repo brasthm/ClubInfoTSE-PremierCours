@@ -8,6 +8,8 @@
 #include <vector>
 #include <string>
 
+void afficherFin(sf::RenderWindow &window, sf::Texture &endScreen);
+
 class Background
 {
 private:
