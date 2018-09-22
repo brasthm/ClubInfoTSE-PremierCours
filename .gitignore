@@ -261,6 +261,7 @@ __pycache__/
 *.pyc
 
 PremierCours/
+Premier-Cours/
 *.vs
 *premier_cours_solution
 
