@@ -83,7 +83,7 @@ void Player::drawImage(sf::RenderWindow& window)
 	window.draw(sprite_); 
 }
 
-void Player::drawImageAnime(sf::RenderWindow& window, const sf::Time& elapsedTime)
+void Player::drawImageAnimee(sf::RenderWindow& window, const sf::Time& elapsedTime)
 { 
 	animatedSprite_->setPosition(position_);
 	spriteJump_.setPosition(position_);

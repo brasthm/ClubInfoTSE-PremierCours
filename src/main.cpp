@@ -9,18 +9,18 @@
 
 int main()
 {
-	//init le son
+	//Initialisation du son
 	sf::Music music;
 	DJ dj(music);
 	dj.playMusicForever("../../music/game.ogg");
 
-	//init les skins
+	//Initialisation des textures
 	InitialiseurDeSprite initSprite;
 
-	//création du joueur
+	//Création du joueur
 	Player player(initSprite);
 
-	//initialisation du fond
+	//Initialisation du fond
 	Background background;
 	background.init(BACKGROUND_PATH + "grassland/bg-grass", 4);
 	background.setSpeed(0, 0);
@@ -33,14 +33,14 @@ int main()
 	sol.setPosition(0, FLOOR);
 	sol.setFillColor(sf::Color(153, 76, 0));
 
-	//ini position
+	//Obstacles
 	std::vector<sf::Vector2f> spawnPositions = { {0,400},{0,150},{ 100,0 },{ 200,0 },{ 300,0 },{ 400,0 },{ 500,0 },{ 600,0 },{ 700,0 } };
 	std::vector<Obstacle> obstacles;
 	sf::Time spawnRate = sf::milliseconds(2000);
 	sf::Time spawnProgression = sf::Time::Zero;
 	srand(time(NULL));
 
-	//Ecran de fin de game
+	//Ecran de fin de partie
 	sf::Texture tscreen;
 	tscreen.create(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 	sf::Sprite sscreen;
@@ -77,11 +77,12 @@ int main()
 			//Evenement de fermeture de la fenetre : on ferme le jeux
 			if (event.type == sf::Event::Closed)
 				window.close();
-
 		}
 
+		// Gestion du joueur
 		player.gestion(window, elapsedTime);
 
+		// Gestion des obstacles
 		spawnProgression += elapsedTime;
 		if (spawnProgression > spawnRate)
 		{
@@ -90,10 +91,10 @@ int main()
 			for (int i = 0; i < rand() % 2; i++)
 				obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % (spawnPositions.size() - 2) + 2]));
 			
-			//obstacles.push_back(Obstacle(initSprite, { 0,0 }));
 			spawnProgression = sf::Time::Zero;
 		}
 
+		// Collisions
 		for (size_t i = 0; i < obstacles.size(); i++)
 		{
 			if (player.isCollision(window, obstacles[i]))
@@ -106,17 +107,16 @@ int main()
 			}
 		}
 
+		// AGestion de la distance
 		distanceText.setString(std::to_string(int(distance + 0.5)) +" m");
 		distanceText.setPosition((WINDOW_SIZE_X - distanceText.getGlobalBounds().width) / 2, 100);
-		
 
 		//----Zone d'affichage----//
 		//Efface la fenetre
 		window.clear();
 
-		//Dessin des images
 		background.draw(window, elapsedTime);
-		player.drawImageAnime(window, elapsedTime);
+		player.drawImageAnimee(window, elapsedTime);
 		window.draw(sol);
 
 		for (size_t i = 0; i < obstacles.size(); i++)
@@ -125,6 +125,7 @@ int main()
 		window.draw(distanceText);
 		window.display();
 
+		// Gestion de la fin de partie
 		if (!player.isAlive())
 		{
 			tscreen.update(window);
