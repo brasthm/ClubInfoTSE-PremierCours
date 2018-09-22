@@ -29,12 +29,12 @@ void Player::jump()
 
 void Player::gestion(sf::RenderWindow & window, const sf::Time& elapsedTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)&&position_.x>0)
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Q)||sf::Keyboard::isKeyPressed(sf::Keyboard::Left))&&position_.x>0)
 		moveLeft(hSpeed_*elapsedTime.asSeconds());
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)&&position_.x<WINDOW_SIZE_X- shape_.getGlobalBounds().width)
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))&&position_.x<WINDOW_SIZE_X- shape_.getGlobalBounds().width)
 		moveRight(hSpeed_*elapsedTime.asSeconds());
 	//Evenement de saut
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)|| sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		jump();
 
 	vSpeed_ += GRAVITY * elapsedTime.asSeconds();
