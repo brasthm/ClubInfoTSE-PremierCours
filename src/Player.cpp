@@ -1,5 +1,6 @@
 #include"Player.h"
 #include<iostream>
+#include "constantes.h"
 
 Player::Player(const InitialiseurDeSprite& initsprite)
 {
@@ -19,7 +20,7 @@ Player::Player(const InitialiseurDeSprite& initsprite)
 	spriteJump_ = sprites.back();
 	sprites.pop_back();
 
-	//ini de l'image anim� du joueur
+	//ini de l'image animé du joueur
 	animatedSprite_ = new AnimatedSprite(sprites, sf::milliseconds(100));
 }
 

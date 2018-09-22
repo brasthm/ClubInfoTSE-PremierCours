@@ -19,7 +19,7 @@ int main()
 	//Création du joueur
 	Player player(initSprite);
 
-	//Initialisation du fond
+	//Initialisation de l'arrière-plan
 	Background background;
 	background.init(BACKGROUND_PATH + "grassland/bg-grass", 4);
 	background.setSpeed(0, 0);
@@ -32,14 +32,14 @@ int main()
 	sol.setPosition(0, FLOOR);
 	sol.setFillColor(sf::Color(153, 76, 0));
 
-	//Obstacles
+	//Obstacles (lasers)
 	std::vector<sf::Vector2f> spawnPositions = { {0,400},{0,150},{ 100,0 },{ 200,0 },{ 300,0 },{ 400,0 },{ 500,0 },{ 600,0 },{ 700,0 } };
 	std::vector<Obstacle> obstacles;
 	sf::Time spawnRate = sf::milliseconds(2000);
 	sf::Time spawnProgression = sf::Time::Zero;
 	srand(static_cast<unsigned int>(time(NULL)));
 
-	//Ecran de fin de partie
+	//Écran de fin de partie
 	sf::Texture tscreen;
 	tscreen.create(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 	sf::Sprite sscreen;
@@ -54,13 +54,13 @@ int main()
 	distanceText.setFont(mons);
 	distanceText.setCharacterSize(32);
 
-	//Création de la fenetre du jeux
+	//Création de la fenêtre du jeu
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER", sf::Style::Default, sf::ContextSettings(0, 0, 8));
 	
 	//Création de la clock
 	sf::Clock clock;
 
-	//Tant que l'on joue (fenetre ouverte)
+	//Tant que l'on joue (fenêtre ouverte)
 	while (window.isOpen())
 	{
 		sf::Time elapsedTime = clock.getElapsedTime();
@@ -70,10 +70,10 @@ int main()
 		//Création d'un objet récupérant les événements (touche clavier et autre)
 		sf::Event event {};
 
-		//Boucle des évennements
+		//Boucle des événements
 		while (window.pollEvent(event))
 		{
-			//Evenement de fermeture de la fenetre : on ferme le jeux
+			//Événement de fermeture de la fenêtre : on ferme le jeu
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
@@ -107,12 +107,12 @@ int main()
 			}
 		}
 
-		// AGestion de la distance
+		// Gestion de la distance
 		distanceText.setString(std::to_string(int(distance + 0.5)) +" m");
 		distanceText.setPosition((WINDOW_SIZE_X - distanceText.getGlobalBounds().width) / 2, 100);
 
 		//----Zone d'affichage----//
-		//Efface la fenetre
+		//Efface la fenêtre
 		window.clear();
 
 		background.draw(window, elapsedTime);

@@ -3,7 +3,6 @@
 
 #include "initSprite.h"
 #include "AnimatedSprite.h"
-#include "constantes.h"
 #include "Obstacle.h"
 
 class Player

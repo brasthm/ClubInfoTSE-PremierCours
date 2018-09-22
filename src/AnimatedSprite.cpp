@@ -1,8 +1,7 @@
 #include "AnimatedSprite.h"
-#include "constantes.h"
 
 
-//Anime les sprites : à chaque appel on ajoute le temps du dernier appel à swapProgression, si ce dernier est supérieur ou égal 
+// Anime les sprites : à chaque appel on ajoute le temps du dernier appel à swapProgression, si ce dernier est supérieur ou égal 
 // à swapRate alors on change le sprite qui sera dessiné
 void AnimatedSprite::animer(const sf::Time& elapsedTime)
 {

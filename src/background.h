@@ -3,8 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "constantes.h"
-
-#include <iostream>
 #include <vector>
 #include <string>
 
