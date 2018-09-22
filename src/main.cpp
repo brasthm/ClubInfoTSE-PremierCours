@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "constantes.h"
 #include "Background.h"
-#include "DJ.hpp"
+#include "DJ.h"
 #include <ctime>
 
 void afficherFin(sf::RenderWindow &window, sf::Texture &endScreen);
