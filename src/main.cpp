@@ -23,12 +23,12 @@ int main()
 	Player player(initSprite);
 
 	//initialisation du fond
-	Background backgound;
-	backgound.init(BACKGROUND_PATH + "grassland/bg-grass", 4);
-	backgound.setSpeed(0, 0);
-	backgound.setSpeed(1, -10);
-	backgound.setSpeed(2, -40);
-	backgound.setSpeed(3, -20);
+	Background background;
+	background.init(BACKGROUND_PATH + "grassland/bg-grass", 4);
+	background.setSpeed(0, 0);
+	background.setSpeed(1, -10);
+	background.setSpeed(2, -40);
+	background.setSpeed(3, -20);
 
 	sf::RectangleShape sol;
 	sol.setSize({ 800,100 });
@@ -100,7 +100,7 @@ int main()
 		window.clear();
 
 		//Dessin des images
-		backgound.draw(window, elapsedTime);
+		background.draw(window, elapsedTime);
 		player.drawImageAnime(window, elapsedTime);
 		window.draw(sol);
 
