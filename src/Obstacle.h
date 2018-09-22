@@ -1,7 +1,7 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 
-#include "SFML\Graphics.hpp"
+#include "SFML/Graphics.hpp"
 #include "AnimatedSprite.h"
 #include "initSprite.h"
 

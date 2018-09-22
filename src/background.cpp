@@ -1,4 +1,4 @@
-#include "Background.h"
+#include "background.h"
 
 void Background::init(const std::string path, int nbLayer)
 {

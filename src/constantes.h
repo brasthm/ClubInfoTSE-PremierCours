@@ -14,7 +14,7 @@ static constexpr size_t NOMBRE_IMAGE_PLAYER = 8;
 //Nombre maximum de texture pour le fond
 static constexpr size_t BG_TEXTURE_MAX = 10;
 
-//Gravité
+//GravitÃ©
 static constexpr float GRAVITY = 20;
 
 //Position du sol
