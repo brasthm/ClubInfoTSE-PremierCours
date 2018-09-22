@@ -40,10 +40,20 @@ int main()
 	sf::Time spawnProgression = sf::Time::Zero;
 	srand(time(NULL));
 
-	//freeze de fin de game
+	//Ecran de fin de game
 	sf::Texture tscreen;
 	tscreen.create(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 	sf::Sprite sscreen;
+
+	//Interface
+	sf::Font mons;
+	sf::Text distanceText;
+	float distance = 0;
+
+	mons.loadFromFile(FONT_MONSERRAT);
+	distanceText.setFillColor(sf::Color::Black);
+	distanceText.setFont(mons);
+	distanceText.setCharacterSize(32);
 
 	//Création de la fenetre du jeux
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER", sf::Style::Default, sf::ContextSettings(0, 0, 8));
@@ -55,6 +65,7 @@ int main()
 	while (window.isOpen())
 	{
 		sf::Time elapsedTime = clock.getElapsedTime();
+		distance += elapsedTime.asSeconds() * 15.f;
 		clock.restart();
 
 		//Création d'un objet récupérant les événements (touche clavier et autre)
@@ -79,6 +90,20 @@ int main()
 			spawnProgression = sf::Time::Zero;
 		}
 
+		for (size_t i = 0; i < obstacles.size(); i++)
+		{
+			if (player.isCollision(window, obstacles[i]))
+				player.kill();
+
+			if (obstacles[i].isDead())
+			{
+				obstacles[i] = obstacles.back();
+				obstacles.pop_back();
+			}
+		}
+
+		distanceText.setString(std::to_string(int(distance + 0.5)) +" m");
+		distanceText.setPosition((WINDOW_SIZE_X - distanceText.getGlobalBounds().width) / 2, 100);
 		
 
 		//----Zone d'affichage----//
@@ -93,20 +118,7 @@ int main()
 		for (size_t i = 0; i < obstacles.size(); i++)
 			obstacles[i].draw(window, elapsedTime);
 
-		for (size_t i = 0; i < obstacles.size(); i++)
-		{
-			if (player.isCollision(window, obstacles[i]))
-			{
-				std::cout << "kill" << std::endl;
-				player.kill();
-			}
-			if (obstacles[i].isDead())
-			{
-				obstacles[i] = obstacles.back();
-				obstacles.pop_back();
-			}
-		}
-
+		window.draw(distanceText);
 		window.display();
 
 		if (!player.isAlive())
@@ -115,6 +127,8 @@ int main()
 			afficherFin(window, tscreen);
 			player.ressurect();
 			obstacles.clear();
+			distance = 0;
+			clock.restart();
 		}
 
 		sf::sleep(sf::milliseconds(10));

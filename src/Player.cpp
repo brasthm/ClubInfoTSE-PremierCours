@@ -56,6 +56,11 @@ void Player::gestion(sf::RenderWindow & window, const sf::Time& elapsedTime)
 		
 }
 
+void Player::ressurect()
+{
+	isAlive_ = true;
+}
+
 bool Player::isCollision(sf::RenderWindow& window, const Obstacle& obstacle)
 {
 	hitbox_.left = position_.x + 100;

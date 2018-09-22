@@ -31,7 +31,7 @@ class Player
 		void moveLeft(const float& x) { position_.x -= x; }
 		void moveRight(const float& x){ position_.x += x; }
 		void gestion(sf::RenderWindow &window, const sf::Time& elapsedTime);
-		void ressurect() { isjumping_ = false; isAlive_ = true; }
+		void ressurect();
 		~Player() { delete animatedSprite_; }
 };
 
