@@ -11,7 +11,7 @@ int main()
 	//init le son
 	sf::Music music;
 	DJ dj(music);
-	dj.playMusicForever("../../music/game.ogg");
+	dj.playMusicForever("../../music/Surf Shimmy.ogg");
 
 	//init les skins
 	InitialiseurDeSprite initSprite;

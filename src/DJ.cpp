@@ -20,6 +20,11 @@ DJ::DJ(sf::Music& m) : music_(m)
 	allTrack_.emplace_back("../../sounds/pas-course.wav");
 	allTrack_.at(0).getSound().setVolume(100);
 	allTrack_.emplace_back("../../sounds/obstacle-sound.wav");
+
+    for (auto &t : allTrack_)
+    {
+		t.getSound().setVolume(20);
+    }
 }
 
 void DJ::playMusicForever(std::string path)
@@ -28,7 +33,8 @@ void DJ::playMusicForever(std::string path)
 	music_.play();
 	music_.setLoop(true);
 	sf::Listener listener;
-	listener.setGlobalVolume(50);
+	//listener.setGlobalVolume(20);
+	music_.setVolume(60);
 }
 
 void DJ::play(size_t n, bool forced)
