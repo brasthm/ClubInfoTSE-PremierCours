@@ -12,7 +12,7 @@ int main()
 	//init le son
 	sf::Music music;
 	DJ dj(music);
-	//dj.playMusicForever("../../music/game.ogg");
+	dj.playMusicForever("../../music/game.ogg");
 
 	//init les skins
 	InitialiseurDeSprite initSprite;
@@ -85,7 +85,11 @@ int main()
 		spawnProgression += elapsedTime;
 		if (spawnProgression > spawnRate)
 		{
-			obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % spawnPositions.size()]));
+			obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % 2]));
+
+			for (int i = 0; i < rand() % 2; i++)
+				obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % (spawnPositions.size() - 2) + 2]));
+			
 			//obstacles.push_back(Obstacle(initSprite, { 0,0 }));
 			spawnProgression = sf::Time::Zero;
 		}
