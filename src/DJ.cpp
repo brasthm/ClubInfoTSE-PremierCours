@@ -1,4 +1,5 @@
 #include "DJ.h"
+#include "constantes.h"
 
 Track::Track(std::string filepath, std::string name)
 {
@@ -19,7 +20,7 @@ DJ::DJ(sf::Music& m) : music_(m)
 	allTrack_.reserve(1);
 
 	// Chargement des sons
-	allTrack_.emplace_back("../../sounds/obstacle-sound.wav");
+	allTrack_.emplace_back(SOUNDS_PATH + "obstacle-sound.wav");
 
     for (auto &t : allTrack_)
     {
