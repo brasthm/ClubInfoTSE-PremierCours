@@ -6,14 +6,15 @@ add_executable(${PROJECT_NAME}
         constantes.h
         DJ.h
         DJ.cpp
-        entite.h
-        entite.cpp
         initSprite.h
         initSprite.cpp
         main.cpp
         Obstacle.h
+        Obstacle.cpp
         Player.h
-        Player.cpp
+        Player.cpp 
+        utilities.h
+        utilities.cpp
     )
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_14)

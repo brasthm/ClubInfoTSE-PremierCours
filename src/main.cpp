@@ -2,9 +2,9 @@
 #include "initSprite.h"
 #include "Player.h"
 #include "constantes.h"
-#include "Background.h"
+#include "background.h"
 #include "DJ.h"
-#include <ctime>
+#include "utilities.h"
 
 int main()
 {
@@ -37,7 +37,6 @@ int main()
 	std::vector<Obstacle> obstacles;
 	sf::Time spawnRate = sf::milliseconds(2000);
 	sf::Time spawnProgression = sf::Time::Zero;
-	srand(time(NULL));
 
 	//Écran de fin de partie
 	sf::Texture tscreen;
@@ -86,10 +85,10 @@ int main()
 		if (spawnProgression > spawnRate)
 		{
 			dj.play(0);
-			obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % 2]));
+			obstacles.push_back(Obstacle(initSprite, spawnPositions[random(0, 1)]));
 
-			if(rand()%2>0)
-				obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % (spawnPositions.size() - 2) + 2]));
+			if(random(0, 1)>0)
+				obstacles.push_back(Obstacle(initSprite, spawnPositions[random(2, spawnPositions.size() - 2)]));
 			
 			spawnProgression = sf::Time::Zero;
 		}
