@@ -123,6 +123,7 @@ int main()
 
 		window.draw(distanceText);
 		window.display();
+        sf::sleep(sf::milliseconds(10));
 
 		// Gestion de la fin de partie
 		if (!player.isAlive())
@@ -134,8 +135,6 @@ int main()
 			distance = 0;
 			clock.restart();
 		}
-
-		sf::sleep(sf::milliseconds(10));
 	}
 	return 0;
 }

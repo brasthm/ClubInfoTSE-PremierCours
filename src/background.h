@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-void afficherFin(sf::RenderWindow &window, sf::Texture &endScreen);
+void afficherFin(sf::RenderWindow &window, const sf::Texture &endScreen);
 
 class Background
 {

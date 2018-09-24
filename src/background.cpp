@@ -40,7 +40,7 @@ void Background::draw(sf::RenderWindow & screen, sf::Time &elapsed)
 	}
 }
 
-void afficherFin(sf::RenderWindow &window, sf::Texture &endScreen)
+void afficherFin(sf::RenderWindow &window, const sf::Texture &endScreen)
 {
 	bool continuer = true;
 	sf::Sprite sprite;
@@ -48,10 +48,10 @@ void afficherFin(sf::RenderWindow &window, sf::Texture &endScreen)
 
 	while (continuer && window.isOpen())
 	{
-		//Création d'un objet récupérant les événements (touche clavier et autre)
+		//CrÃ©ation d'un objet rÃ©cupÃ©rant les Ã©vÃ©nements (touche clavier et autre)
 		sf::Event event {};
 
-		//Boucle des évennements
+		//Boucle des Ã©vennements
 		while (window.pollEvent(event))
 		{
 			//Evenement de fermeture de la fenetre : on ferme le jeux
