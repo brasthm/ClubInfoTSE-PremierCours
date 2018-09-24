@@ -3,6 +3,7 @@
 void Background::init(const std::string path, int nbLayer)
 {
 	if (nbLayer >= BG_TEXTURE_MAX) exit(-1);
+	float m = 0, s = 1, f = 10;
 	for (int i = 0; i < nbLayer; i++)
 	{
 		layers1_.emplace_back();

@@ -2,6 +2,7 @@
 #define OBSTACLE_H
 
 #include "SFML/Graphics.hpp"
+#include "AnimatedSprite.h"
 #include "initSprite.h"
 
 class Obstacle

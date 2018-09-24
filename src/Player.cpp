@@ -1,10 +1,9 @@
 #include"Player.h"
 #include<iostream>
-#include "constantes.h"
 
 Player::Player(const InitialiseurDeSprite& initsprite)
 {
-	//ini du skin rectangle du joueur
+	//Initialisation du rectangle représentant le joueur
 	shape_.setSize({ 200,250 });
 	shape_.setPosition(0, 160);
 	shape_.setFillColor(sf::Color::Blue);
@@ -14,47 +13,17 @@ Player::Player(const InitialiseurDeSprite& initsprite)
 
 	std::vector<sf::Sprite> sprites = initsprite.getSpritePlayer();
 
-	//ini de l'image du joueur
-	sprite_ = sprites[0];
-
-	spriteJump_ = sprites.back();
+	//Initialisation de l'image animée du joueur
 	sprites.pop_back();
-
-	//ini de l'image animé du joueur
 	animatedSprite_ = new AnimatedSprite(sprites, sf::milliseconds(100));
 }
 
 
-void Player::jump() 
-{
-	if(!isjumping_)
-	{ 
-		vSpeed_ = -10;
-		isjumping_ = true;
-		hitbox_.height = 140;
-	}
-}
 
 void Player::gestion(sf::RenderWindow& window, const sf::Time& elapsedTime)
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && position_.x > 0)
-        moveLeft(hSpeed_ * elapsedTime.asSeconds());
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && position_.x < WINDOW_SIZE_X - shape_.getGlobalBounds().width)
-        moveRight(hSpeed_ * elapsedTime.asSeconds());
-    // Événement de saut
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        jump();
-
-    vSpeed_ += GRAVITY * elapsedTime.asSeconds();
-
-	position_.y += vSpeed_;
-	if (position_.y > FLOOR - shape_.getGlobalBounds().height)
-	{
-		position_.y = FLOOR - shape_.getGlobalBounds().height;
-		isjumping_ = false;
-		hitbox_.height = 200;
-	}
-		
+    //----Zone de gestion du joueur
+    //...
 }
 
 void Player::ressurect()
@@ -62,7 +31,7 @@ void Player::ressurect()
 	isAlive_ = true;
 }
 
-bool Player::isCollision(sf::RenderWindow& window, const Obstacle& obstacle)
+bool Player::isCollision(const Obstacle& obstacle)
 {
 	hitbox_.left = position_.x + 100;
 	hitbox_.top = position_.y + 50;
@@ -74,13 +43,12 @@ bool Player::isCollision(sf::RenderWindow& window, const Obstacle& obstacle)
 
 void Player::drawRectangle(sf::RenderWindow& window) 
 { 
-	shape_.setPosition(position_); 
 	window.draw(shape_); 
 }
 
-void Player::drawImage(sf::RenderWindow& window) 
+void Player::drawImage(sf::RenderWindow& window)
 { 
-	sprite_.setPosition(position_); 
+	sprite_.setPosition(position_);
 	window.draw(sprite_); 
 }
 

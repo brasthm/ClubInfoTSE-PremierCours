@@ -1,4 +1,5 @@
 #include "DJ.h"
+#include "constantes.h"
 
 Track::Track(std::string filepath, std::string name)
 {
@@ -19,7 +20,7 @@ DJ::DJ(sf::Music& m) : music_(m)
 	allTrack_.resize(1);
 
 	// Chargement des sons
-	allTrack_.at(0) = *(new Track("../../sounds/obstacle-sound.wav"));
+	allTrack_.at(0) = *(new Track(SOUNDS_PATH + "obstacle-sound.wav"));
 
     for (auto &t : allTrack_)
     {
@@ -32,7 +33,7 @@ void DJ::playMusicForever(std::string path)
 	music_.openFromFile(path);
 	music_.play();
 	music_.setLoop(true);
-	//sf::Listener listener;
+	sf::Listener listener;
 	//listener.setGlobalVolume(20);
 	music_.setVolume(60);
 }
