@@ -37,14 +37,14 @@ int main()
 	std::vector<Obstacle> obstacles;
 	sf::Time spawnRate = sf::milliseconds(2000);
 	sf::Time spawnProgression = sf::Time::Zero;
-	srand(static_cast<unsigned int>(time(NULL)));
+	srand(time(NULL));
 
 	//Écran de fin de partie
 	sf::Texture tscreen;
 	tscreen.create(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 	sf::Sprite sscreen;
 
-	//Interface
+	//Interface (mètres)
 	sf::Font mons;
 	sf::Text distanceText;
 	float distance = 0;
@@ -55,7 +55,7 @@ int main()
 	distanceText.setCharacterSize(32);
 
 	//Création de la fenêtre du jeu
-	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER", sf::Style::Default, sf::ContextSettings(0, 0, 8));
+	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "SUPER RUNNER");
 	
 	//Création de la clock
 	sf::Clock clock;
@@ -88,7 +88,7 @@ int main()
 			dj.play(0);
 			obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % 2]));
 
-			for (int i = 0; i < rand() % 2; i++)
+			if(rand()%2>0)
 				obstacles.push_back(Obstacle(initSprite, spawnPositions[rand() % (spawnPositions.size() - 2) + 2]));
 			
 			spawnProgression = sf::Time::Zero;
