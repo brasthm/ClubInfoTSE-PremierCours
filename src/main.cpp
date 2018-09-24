@@ -10,9 +10,9 @@
 int main()
 {
 	// Initialisation des ressources
-	#include "initialisation.cpp"
-	
-	
+	#include "initialisation"
+
+
     // ----Zone pour créer le sol----
 	// sf::RectangleShape sol;
 	// sol.setSize({ 800,100 });
