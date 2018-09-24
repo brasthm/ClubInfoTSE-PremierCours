@@ -9,7 +9,7 @@ InitialiseurDeSprite::InitialiseurDeSprite()
 	initialiserSpriteObstacle();
 }
 
-//initialise le sprite du joueur
+// initialise le sprite du joueur
 void InitialiseurDeSprite::initialiserSpritePlayer()
 {
 	for (unsigned int i = 1; i < NOMBRE_IMAGE_PLAYER+1; i++)

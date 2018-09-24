@@ -30,4 +30,4 @@ class DJ
 
 };
 
-#endif //DJ_HPP
+#endif // DJ_HPP

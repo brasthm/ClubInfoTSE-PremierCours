@@ -33,8 +33,8 @@ void DJ::playMusicForever(std::string path)
 	music_.openFromFile(path);
 	music_.play();
 	music_.setLoop(true);
-	//sf::Listener listener;
-	//listener.setGlobalVolume(20);
+	// sf::Listener listener;
+	// listener.setGlobalVolume(20);
 	music_.setVolume(60);
 }
 

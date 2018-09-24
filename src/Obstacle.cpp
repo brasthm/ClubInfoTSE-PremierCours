@@ -9,7 +9,7 @@ Obstacle::Obstacle(const InitialiseurDeSprite& inisprite, const sf::Vector2f& po
 
 	barre1_.setPosition(position_);
 
-	if (position_.y == 0) //vertical
+	if (position_.y == 0) // vertical
 	{
 		sprite_ = inisprite.getSpriteObstacle()[1];
 		sprite_.setScale(1, WINDOW_SIZE_Y / sprite_.getGlobalBounds().height);

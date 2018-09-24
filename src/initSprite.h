@@ -2,7 +2,7 @@
 #define INIT_H
 #include <SFML/Graphics.hpp>
 
-//class stockant les textures en mémoire
+// class stockant les textures en mï¿½moire
 class InitialiseurDeSprite
 {
 private:
@@ -12,7 +12,7 @@ private:
 	std::vector<sf::Texture> textureObstacle_;
 	std::vector<sf::Sprite> spriteObstacle_;
 
-	//Methodes privées
+	// Methodes privï¿½es
 	void initialiserSpritePlayer();
 	void initialiserSpriteObstacle();
 public:

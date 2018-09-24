@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-//Class dont le but est de gérer plusieur sprite pour faire un sprite animé
+// Class dont le but est de gérer plusieur sprite pour faire un sprite animé
 class AnimatedSprite
 {
 	private:

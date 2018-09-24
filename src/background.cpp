@@ -49,27 +49,27 @@ void afficherFin(sf::RenderWindow &window, const sf::Texture &endScreen)
 
 	while (continuer && window.isOpen())
 	{
-		//Création d'un objet récupérant les événements (touche clavier et autre)
+		// Création d'un objet récupérant les événements (touche clavier et autre)
 		sf::Event event {};
 
-		//Boucle des évennements
+		// Boucle des évennements
 		while (window.pollEvent(event))
 		{
-			//Evenement de fermeture de la fenetre : on ferme le jeux
+			// Evenement de fermeture de la fenetre : on ferme le jeux
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-			//Evenement clavier
+			// Evenement clavier
 			if (event.type == sf::Event::KeyPressed)
 			{
-				//Evenement de saut
+				// Evenement de saut
 				if (event.key.code == sf::Keyboard::Return)
 					continuer = false;
 			}
 		}
 
-		//----Zone d'affichage----//
-		//Efface la fenetre
+		// ----Zone d'affichage----// 
+		// Efface la fenetre
 		window.clear();
 		window.draw(sprite);
 		window.display();

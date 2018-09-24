@@ -3,7 +3,7 @@
 
 Player::Player(const InitialiseurDeSprite& initsprite)
 {
-	//Initialisation du rectangle représentant le joueur
+	// Initialisation du rectangle représentant le joueur
 	shape_.setSize({ 200,250 });
 	shape_.setPosition(0, 160);
 	shape_.setFillColor(sf::Color::Blue);
@@ -13,7 +13,7 @@ Player::Player(const InitialiseurDeSprite& initsprite)
 
 	std::vector<sf::Sprite> sprites = initsprite.getSpritePlayer();
 
-	//Initialisation de l'image animée du joueur
+	// Initialisation de l'image animée du joueur
 	sprites.pop_back();
 	animatedSprite_ = new AnimatedSprite(sprites, sf::milliseconds(100));
 }
@@ -22,8 +22,8 @@ Player::Player(const InitialiseurDeSprite& initsprite)
 
 void Player::gestion(sf::RenderWindow& window, const sf::Time& elapsedTime)
 {
-    //----Zone de gestion du joueur
-    //...
+    // ----Zone de gestion du joueur
+    // ...
 }
 
 void Player::ressurect()
