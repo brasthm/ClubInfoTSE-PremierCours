@@ -23,7 +23,7 @@ Player::Player(const InitialiseurDeSprite& initsprite)
 void Player::gestion(sf::RenderWindow& window, const sf::Time& elapsedTime)
 {
     // ----Zone de gestion du joueur
-    // ...
+    
 }
 
 void Player::ressurect()
@@ -43,13 +43,14 @@ bool Player::isCollision(const Obstacle& obstacle)
 
 void Player::drawRectangle(sf::RenderWindow& window) 
 { 
+	// Affichage du rectangle
 	window.draw(shape_); 
 }
 
 void Player::drawImage(sf::RenderWindow& window)
 { 
 	sprite_.setPosition(position_);
-	window.draw(sprite_); 
+	window.draw(sprite_);
 }
 
 void Player::drawImageAnimee(sf::RenderWindow& window, const sf::Time& elapsedTime)

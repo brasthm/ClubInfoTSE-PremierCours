@@ -12,15 +12,14 @@ int main()
 	// Initialisation des ressources
 	#include "initialisation"
 
-	// Création du joueur
-
-
 	/*
 		Déclarer les variables ICI
 										*/
+	// Création du joueur
 
 
-    // ----Zone pour créer le sol----
+	// ----Zone pour créer le sol----
+
 
 	// Tant que l'on joue (fenetre ouverte)
 	while (window.isOpen())
@@ -47,14 +46,16 @@ int main()
 		// ----Zone d'affichage----// 
 
 		window.clear();
+
 		/*
 				Mettre les fonction d'affichage ICI
 														*/
+
 		window.display();
 
 
 		// Ecran de fin
-		
+
 		sf::sleep(sf::milliseconds(10));
 	}
 	return 0;
