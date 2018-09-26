@@ -5,9 +5,6 @@ DJ dj(music);
 // Initialisation des textures
 InitialiseurDeSprite initSprite;
 
-// Création du joueur
-Player player(initSprite);
-
 // Obstacles
 std::vector<sf::Vector2f> spawnPositions = { {0,400},{0,150},{ 100,0 },{ 200,0 },{ 300,0 },{ 400,0 },{ 500,0 },{ 600,0 },{ 700,0 } };
 std::vector<Obstacle> obstacles;

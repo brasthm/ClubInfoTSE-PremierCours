@@ -12,11 +12,15 @@ int main()
 	// Initialisation des ressources
 	#include "initialisation"
 
+	// Création du joueur
+
+
+	/*
+		Déclarer les variables ICI
+										*/
+
 
     // ----Zone pour créer le sol----
-	// sf::RectangleShape sol;
-	// sol.setSize({ 800,100 });
-    // ...
 
 	// Tant que l'on joue (fenetre ouverte)
 	while (window.isOpen())
@@ -36,10 +40,20 @@ int main()
 				window.close();
 		}
 
+		/*
+			Mettre les fonctions de gestion ICI
+														*/
+
 		// ----Zone d'affichage----// 
-		// Efface la fenêtre
+
 		window.clear();
+		/*
+				Mettre les fonction d'affichage ICI
+														*/
 		window.display();
+
+
+		// Ecran de fin
 		
 		sf::sleep(sf::milliseconds(10));
 	}
